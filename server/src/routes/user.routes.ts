@@ -46,7 +46,7 @@ user
 					password: hashHex,
 				},
 			});
-
+			
 			const token = await sign(
 				{ userId: newUser.id, username: newUser.username },
 				c.env.JWT_SECRET
@@ -64,7 +64,6 @@ user
 		const prisma = new PrismaClient({
 			datasourceUrl: c.env.DATABASE_URL,
 		}).$extends(withAccelerate());
-
 		const body = await c.req.json();
 
 		try {
