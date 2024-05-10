@@ -6,6 +6,7 @@
   "dependencies": {
     "@prisma/client": "^5.13.0",
     "@prisma/extension-accelerate": "^1.0.0",
+    "@whale_in_space/inkspire-common": "^1.0.1",
     "hono": "^4.3.3",
     "prisma": "^5.13.0"
   },

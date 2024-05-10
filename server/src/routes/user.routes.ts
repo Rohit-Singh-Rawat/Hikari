@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
+import { signinInput, signupInput } from '@whale_in_space/inkspire-common';
 import { Hono } from 'hono';
 import { sign } from 'hono/jwt';
 
@@ -19,7 +20,13 @@ user
 		}).$extends(withAccelerate());
 
 		const body = await c.req.json();
-
+		const { success, error } = signupInput.safeParse(body);
+		if (!success) {
+			c.status(411);
+			return c.json({
+				msg: error || 'Inputs are wrong',
+			});
+		}
 		try {
 			const salt = crypto.getRandomValues(new Uint8Array(16));
 
@@ -46,7 +53,7 @@ user
 					password: hashHex,
 				},
 			});
-			
+
 			const token = await sign(
 				{ userId: newUser.id, username: newUser.username },
 				c.env.JWT_SECRET
@@ -65,6 +72,13 @@ user
 			datasourceUrl: c.env.DATABASE_URL,
 		}).$extends(withAccelerate());
 		const body = await c.req.json();
+		const { success, error } = signinInput.safeParse(body);
+		if (!success) {
+			c.status(411);
+			return c.json({
+				msg: error || 'Inputs are wrong',
+			});
+		}
 
 		try {
 			const user = await prisma.user.findUnique({

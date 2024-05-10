@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
+import { createBlogInput, updateBlogInput } from '@whale_in_space/inkspire-common';
 import { Hono } from 'hono';
 import { verify } from 'hono/jwt';
 
@@ -46,6 +47,13 @@ blog
 		}).$extends(withAccelerate());
 		
 		const body  = await c.req.json();
+			const { success, error } = createBlogInput.safeParse(body);
+			if (!success) {
+				c.status(411);
+				return c.json({
+					msg: error || 'Inputs are wrong',
+				});
+			}
 		
 		try {
 			const blog = await prisma.blog.create({
@@ -73,6 +81,13 @@ blog
 			datasourceUrl: c.env.DATABASE_URL,
 		}).$extends(withAccelerate());
 		const body  = await c.req.json();
+			const { success, error } = updateBlogInput.safeParse(body);
+			if (!success) {
+				c.status(411);
+				return c.json({
+					msg: error || 'Inputs are wrong',
+				});
+			}
 		try {
 			const blog = await prisma.blog.update({
 				where: { id: body.id, authorId: userId },
