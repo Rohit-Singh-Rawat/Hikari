@@ -1,5 +1,5 @@
 {
-  "name": "@whale_in_space/inkspire-common",
+  "name": "@whale_in_space/story-common",
   "version": "1.0.1",
   "main": "dist/index.js",
   "scripts": {

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
-import { signinInput, signupInput } from '@whale_in_space/inkspire-common';
+import { signinInput, signupInput } from '@whale_in_space/story-common';
 import { Hono } from 'hono';
 import { sign } from 'hono/jwt';
 
