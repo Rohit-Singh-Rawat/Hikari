@@ -1,44 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HikariIcon from './icons/HikariIcon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LabelledButton from './LabelledButton';
+import { SigninType } from '@whale_in_space/story-common';
+import { Toaster, toast } from 'sonner';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 const SignInBlock = () => {
+	const [signinInputs, setSigninTnputs] = useState<SigninType>({
+		email: '',
+		password: '',
+	});
+	const navigate = useNavigate();
+	const mutation = useMutation({
+		mutationFn: (event: React.FocusEvent<HTMLFormElement>) => {
+			event.preventDefault();
+			if (signinInputs.email.trim() === '' || signinInputs.password.trim() === '') {
+				throw new Error('Please fill out all required fields');
+			}
+			toast.loading('Signing In...');
+
+			return axios.post('http://127.0.0.1:8787/api/v1/user/signin', signinInputs);
+		},
+		onSettled: () => {
+			toast.dismiss();
+		},
+		onError: (error) => {
+			toast.error(error.message || 'Error');
+		},
+		onSuccess: (data) => {
+			localStorage.setItem('token', data.data.jwt);
+			toast.success('Signed In successfully');
+			setTimeout(() => {
+				navigate('/blogs');
+			}, 500);
+		},
+	});
+
 	return (
-		<div className='h-screen w-full font-olyford flex flex-col gap-6 lg:gap-16 items-center'>
+		<div className='h-screen w-full font-fractul flex flex-col gap-6 lg:gap-16 items-center'>
 			<Link
 				to={'/'}
 				className='w-full'
 			>
 				<HikariIcon className='w-32 h-10 mx-6 mt-10 lg:mx-16 lg:mt-20' />
 			</Link>
-			<div className='w-[100%] md:w-[60%] md:min-w-[500px] max-w-[600px] md:max-w-none lg:w-[60%] p-10 flex flex-col  items-start gap-8 lg:gap-10'>
+			<div className='w-[100%] min-h-[calc(100dvh-200px)]justify-center md:w-[60%] md:min-w-[500px] max-w-[600px] md:max-w-none lg:w-[60%] p-10 flex flex-col  items-start gap-8 lg:gap-10'>
 				<div>
-					<h1 className='font-olyford text-4xl font-bold  text-left'>Sign In </h1>
+					<h1 className='font-fractul text-5xl font-bold  text-left'>Sign In </h1>
 				</div>
 
 				<form
-					action='
-        '
 					className='w-full flex flex-col gap-10 md:items-center'
+					onSubmit={!mutation.isPending ? mutation.mutate : undefined}
 				>
 					<LabelledButton
 						label='Username or Email'
 						type='text'
 						placeHolder='Enter your username or email'
+						onChange={(e) => {
+							setSigninTnputs((c) => ({ ...c, email: e.target.value }));
+						}}
 					/>
 					<LabelledButton
 						label='Password'
 						type='password'
 						placeHolder='Enter your password'
+						onChange={(e) => {
+							setSigninTnputs((c) => ({ ...c, password: e.target.value }));
+						}}
 					/>
 					<input
 						type='submit'
 						value={'Sign In'}
-						className='w-full  p-4 px-5 bg-black font-olyford text-sm text-white rounded-full'
+						className='w-full cursor-pointer p-4 px-5 bg-black font-fractul text-sm text-white rounded-full'
+						disabled={mutation.isPending}
 					></input>
-					<div className='font-mono font-thin tracking-tighter text-stone-500 text-center w-full'>
-						Don't have an account?{' '}
+					<div className=' text-stone-500 text-center w-full'>
+						Don't have Account?{' '}
 						<Link
 							to={'/signup'}
 							className='underline text-black'

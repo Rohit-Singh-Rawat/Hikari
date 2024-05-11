@@ -2,146 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-black.otf') format('opentype');
-    font-weight: 900;
-    font-style: normal;
-}
 
 @font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-black_italic.otf') format('opentype');
-    font-weight: 900;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-bold.otf') format('opentype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-bold_italic.otf') format('opentype');
-    font-weight: bold;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-extrabold.otf') format('opentype');
-    font-weight: 800;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-extrabold_italic.otf') format('opentype');
-    font-weight: 800;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-extralight.otf') format('opentype');
-    font-weight: 200;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-extralight_italic.otf') format('opentype');
-    font-weight: 200;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-heavy.otf') format('opentype');
-    font-weight: 800;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-heavy_italic.otf') format('opentype');
-    font-weight: 800;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-light.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-light_italic.otf') format('opentype');
-    font-weight: 300;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-medium_italic.otf') format('opentype');
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-MediumItalic.ttf') format('truetype');
     font-weight: 500;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-regular.otf') format('opentype');
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-regular_italic.otf') format('opentype');
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Hairline.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-HairlineItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Italic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-semibold.otf') format('opentype');
-    font-weight: 600;
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Light.ttf') format('truetype');
+    font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-semibold_italic.otf') format('opentype');
-    font-weight: 600;
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-LightItalic.ttf') format('truetype');
+    font-weight: 300;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-thin.otf') format('opentype');
-    font-weight: 100;
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Medium.ttf') format('truetype');
+    font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Olyford';
-    src: url('./assets/fonts/olyford-thin_italic.otf') format('opentype');
-    font-weight: 100;
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
     font-style: italic;
 }
 
-.font-olyford {
-	font-family: 'Olyford', 'Courier New', Courier, monospace;
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
 }
+
+@font-face {
+    font-family: 'Fractul';
+    src: url('./assets/fonts/Fractul-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+
+
+.font-fractul {
+    font-family: 'Fractul','Courier New', Courier, monospace;
+}
+
