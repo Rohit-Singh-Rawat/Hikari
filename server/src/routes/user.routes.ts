@@ -20,13 +20,16 @@ user
 		}).$extends(withAccelerate());
 
 		const body = await c.req.json();
+		
 		const { success, error } = signupInput.safeParse(body);
 		if (!success) {
 			c.status(411);
+			console.log(error)
 			return c.json({
 				msg: error || 'Inputs are wrong',
 			});
 		}
+		console.log('object');
 		try {
 			const salt = crypto.getRandomValues(new Uint8Array(16));
 
@@ -44,8 +47,10 @@ user
 				.map((byte) => byte.toString(16).padStart(2, '0'))
 				.join('');
 
+				console.log("ji")
 			const newUser = await prisma.user.create({
 				data: {
+					avatar:'',
 					email: body.email,
 					FullName: body.FullName,
 					username: body.username,
@@ -63,6 +68,7 @@ user
 				jwt: token,
 			});
 		} catch (error) {
+			console.log(error)
 			return c.status(403);
 		}
 	})

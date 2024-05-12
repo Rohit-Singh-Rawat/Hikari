@@ -4,7 +4,7 @@ import TimeIcon from './icons/TimeIcon';
 import ReadIcon from './icons/ReadIcon';
 import { Link } from 'react-router-dom';
 import { BlogPropsType } from '../types/Blogprops.type';
-import { calculateReadTime } from '../utils/ReadTimeCalculate';
+import { calculateReadTime } from '../../../server/src/utils/ReadTimeCalculate';
 
 const BlogBlock = ({ id, heading, content, publishedOn, reads, imgUrl, author }: BlogPropsType) => {
 	const readTime = useMemo(() => {
@@ -16,7 +16,7 @@ const BlogBlock = ({ id, heading, content, publishedOn, reads, imgUrl, author }:
 			<div className='flex items-center justify-start gap-3 '>
 				<Avatar
 					url={author?.avatarUrl}
-					size={'8'}
+					className='size-7 md:size-8 '
 				/>
 				<div>{author.name}</div>
 				<span className='-translate-y-1'>.</span>

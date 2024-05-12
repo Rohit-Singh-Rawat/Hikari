@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Blog" ALTER COLUMN "postImg" DROP DEFAULT,
+ALTER COLUMN "readTime" DROP DEFAULT;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "avatar" DROP DEFAULT;

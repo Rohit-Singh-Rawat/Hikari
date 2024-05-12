@@ -27,7 +27,7 @@ const NavBar = () => {
 				</Link>
 				<Avatar
 					url='https://res.cloudinary.com/ytx/image/upload/v1715095202/foyp0xkxkwntfusvulas.jpg'
-					size={'8'}
+					className='size-7 md:size-8'
 				/>
 			</div>
 		</nav>

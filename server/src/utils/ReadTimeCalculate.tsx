@@ -4,7 +4,7 @@ interface BlogContent {
 	imageCount?: number;
 }
 
-export function calculateReadTime(blog: BlogContent, averageSpeed: number = 200): string {
+export function calculateReadTime(blog: BlogContent, averageSpeed: number = 200): number {
 	const readingSpeed: number = averageSpeed;
 	const wordCount = blog.content.split(' ').length;
 	const headingCount = blog.heading.split(' ').length;
@@ -15,5 +15,5 @@ export function calculateReadTime(blog: BlogContent, averageSpeed: number = 200)
 
 	const roundedReadTime: number = Math.ceil(readTimeMinutes);
 
-	return `${roundedReadTime} mins`;
+	return roundedReadTime;
 }

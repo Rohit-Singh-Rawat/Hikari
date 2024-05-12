@@ -3,6 +3,7 @@ import { withAccelerate } from '@prisma/extension-accelerate';
 import { createBlogInput, updateBlogInput } from '@whale_in_space/story-common';
 import { Hono } from 'hono';
 import { verify } from 'hono/jwt';
+import { calculateReadTime } from '../utils/ReadTimeCalculate';
 
 type Variables = {
 	userId: string;
@@ -61,6 +62,9 @@ blog
 					title: body.title,
 					content: body.content,
 					authorId: userId,
+					readTime:calculateReadTime({heading:body.title,content:body.content, }),
+					reads:0,
+					postImg:'',
 					published: body.published || false,
 				},
 			});
