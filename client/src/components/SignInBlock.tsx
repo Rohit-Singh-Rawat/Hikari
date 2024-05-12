@@ -46,7 +46,7 @@ const SignInBlock = () => {
 			>
 				<HikariIcon className='w-32 h-10 mx-6 mt-10 lg:mx-16 lg:mt-20' />
 			</Link>
-			<div className='w-[100%] min-h-[calc(100dvh-200px)]justify-center md:w-[60%] md:min-w-[500px] max-w-[600px] md:max-w-none lg:w-[60%] p-10 flex flex-col  items-start gap-8 lg:gap-10'>
+			<div className='w-[100%] min-h-[calc(100dvh-200px)] justify-center md:w-[60%] md:min-w-[500px] max-w-[600px] md:max-w-none lg:w-[60%] p-10 flex flex-col  items-start gap-8 lg:gap-10'>
 				<div>
 					<h1 className='font-fractul text-5xl font-bold  text-left'>Sign In </h1>
 				</div>

@@ -10,7 +10,7 @@ const HikariIcon = ({ className }: { className?: string }) => {
 			viewBox='38.363565063476564 86.72458038330078 263.2728698730469 76.55083923339843'
 			preserveAspectRatio='xMidYMid meet'
 			color-interpolation-filters='sRGB'
-      className={className}
+			className={className}
 		>
 			<g>
 				<defs>

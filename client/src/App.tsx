@@ -3,6 +3,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Blog from './pages/Blog';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Home from './pages/Home';
 
 function App() {
 	const queryClient = new QueryClient();
@@ -18,6 +19,10 @@ function App() {
 						<Route
 							path='/signin'
 							element={<Signin />}
+						/>
+						<Route
+							path='/blogs'
+							element={<Home/>}
 						/>
 						<Route
 							path='/blog/:id'

@@ -46,14 +46,14 @@ const SignUpBlock = () => {
 		},
 	});
 	return (
-		<div className='h-screen w-full font-fractul  flex flex-col gap-6 lg:gap-14 items-center '>
+		<div className='h-screen w-full font-fractul  flex flex-col md:gap-10  lg:gap-14 items-center '>
 			<Link
 				to={'/'}
 				className='w-full'
 			>
 				<HikariIcon className='w-32 h-10 mx-6 mt-10 lg:mx-16 lg:mt-20' />
 			</Link>
-			<div className='w-[100%] min-h-[calc(100dvh-200px)] mb-12 justify-center md:w-[60%] md:min-w-[500px] max-w-[600px] md:max-w-none lg:w-[60%] px-10   flex flex-col items-start gap-8'>
+			<div className='w-[100%] min-h-[calc(100dvh-200px)] mt-[10vh] md:mt-0  mb-12 justify-center md:w-[60%] md:min-w-[500px] max-w-[600px] md:max-w-none lg:w-[60%] px-10   flex flex-col items-start gap-8'>
 				<div>
 					<h1 className='font-fractul text-5xl font-bold  text-left'>Sign Up </h1>
 				</div>
