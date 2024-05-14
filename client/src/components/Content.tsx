@@ -60,7 +60,8 @@ export default function Content() {
 		<BlockNoteView
 			editor={editor}
 			theme={redTheme}
-			className='w-full  min-h-[calc(100dvh-260px)] border-[#f1f5f9] rounded-2xl my-10 border-2 p-2 shadow-md'
+			className='w-full  min-h-[calc(100dvh-260px)] border-[#f1f5f9] font-fractul rounded-2xl my-10 border-2 px-2 py-5 shadow-md'
+			data-changing-font-demo
 		/>
 	);
 }

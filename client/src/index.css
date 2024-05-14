@@ -136,3 +136,6 @@
     font-family: 'Fractul','Courier New', Courier, monospace;
 }
 
+.bn-container[data-changing-font-demo] .bn-editor * {
+   font-family: 'Fractul','Courier New', Courier, monospace;
+}

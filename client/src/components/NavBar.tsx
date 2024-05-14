@@ -28,10 +28,11 @@ const NavBar = () => {
 					<WriteIcon className='size-6' />
 					<p>Write</p>
 				</Link>
-				<Avatar
+				<div><Avatar
 					name='Rohit'
 					className='size-7 md:size-8'
-				/>
+				/></div>
+				
 			</div>
 		</nav>
 	);
