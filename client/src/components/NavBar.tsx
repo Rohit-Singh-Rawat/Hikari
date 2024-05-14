@@ -21,12 +21,15 @@ const NavBar = () => {
 					/>
 					<SearchIcon className='size-5 cursor-pointer' />
 				</div>
-				<Link to='/new-story' className='lg:flex gap-2 justify-center items-end cursor-pointer opacity-70 hover:opacity-100 hidden '>
+				<Link
+					to='/new-story'
+					className='lg:flex gap-2 justify-center items-end cursor-pointer opacity-70 hover:opacity-100 hidden '
+				>
 					<WriteIcon className='size-6' />
 					<p>Write</p>
 				</Link>
 				<Avatar
-					url='https://res.cloudinary.com/ytx/image/upload/v1715095202/foyp0xkxkwntfusvulas.jpg'
+					name='Rohit'
 					className='size-7 md:size-8'
 				/>
 			</div>

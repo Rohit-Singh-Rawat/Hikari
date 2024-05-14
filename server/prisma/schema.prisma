@@ -28,7 +28,8 @@ model Blog {
   title       String
   content     String
   reads       Int      @default(0)
-  readTime    Int      
+  readTime    Int 
+  category    String     
   published   Boolean  @default(false)
   publishedOn DateTime @default(now())
   author      User     @relation(fields: [authorId], references: [id])

@@ -64,7 +64,7 @@ blog
 					authorId: userId,
 					readTime:calculateReadTime({heading:body.title,content:body.content, }),
 					reads:0,
-					postImg:'',
+					category:body.category,
 					published: body.published || false,
 				},
 			});

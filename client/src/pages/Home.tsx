@@ -20,7 +20,7 @@ const Home = () => {
 	// 				Authorization	: token,
 	// 			},
 	// 		});
-				
+
 	// 		return response;
 	// 	},
 	// });
@@ -35,7 +35,7 @@ const Home = () => {
 					Blogs
 				</h1>
 				<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
-					{blogs.map((blog :any) => {
+					{blogs.map((blog: any) => {
 						return (
 							<BlogBlock
 								reads={blog.reads}
@@ -43,7 +43,7 @@ const Home = () => {
 								id={blog.authorId}
 								heading={blog.heading}
 								publishedOn={blog.publishedOn}
-								imgUrl={blog.imgUrl}
+								category={blog.category}
 								author={blog.author}
 							/>
 						);
