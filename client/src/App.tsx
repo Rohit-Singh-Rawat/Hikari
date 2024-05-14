@@ -4,6 +4,7 @@ import Signin from './pages/Signin';
 import Blog from './pages/Blog';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from './pages/Home';
+import NewStory from './pages/NewStory';
 
 function App() {
 	const queryClient = new QueryClient();
@@ -22,11 +23,15 @@ function App() {
 						/>
 						<Route
 							path='/blogs'
-							element={<Home/>}
+							element={<Home />}
 						/>
 						<Route
 							path='/blog/:id'
 							element={<Blog />}
+						/>
+						<Route
+							path='/new-story'
+							element={<NewStory />}
 						/>
 					</Routes>
 				</BrowserRouter>

@@ -3,7 +3,6 @@ import { withAccelerate } from '@prisma/extension-accelerate';
 import { signinInput, signupInput } from '@whale_in_space/story-common';
 import { Hono } from 'hono';
 import { sign } from 'hono/jwt';
-
 type Bindings = {
 	DATABASE_URL: string;
 	JWT_SECRET: string;
@@ -20,11 +19,11 @@ user
 		}).$extends(withAccelerate());
 
 		const body = await c.req.json();
-		
+
 		const { success, error } = signupInput.safeParse(body);
 		if (!success) {
 			c.status(411);
-			console.log(error)
+			console.log(error);
 			return c.json({
 				msg: error || 'Inputs are wrong',
 			});
@@ -47,10 +46,10 @@ user
 				.map((byte) => byte.toString(16).padStart(2, '0'))
 				.join('');
 
-				console.log("ji")
+			console.log('ji');
 			const newUser = await prisma.user.create({
 				data: {
-					avatar:'',
+					
 					email: body.email,
 					FullName: body.FullName,
 					username: body.username,
@@ -68,7 +67,7 @@ user
 				jwt: token,
 			});
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 			return c.status(403);
 		}
 	})
