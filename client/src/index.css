@@ -2,140 +2,225 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-MediumItalic.ttf') format('truetype');
-    font-weight: 500;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-MediumItalic.ttf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-SemiBold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-SemiBoldItalic.ttf') format('truetype');
-    font-weight: 600;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-SemiBoldItalic.ttf') format('truetype');
+	font-weight: 600;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Thin.ttf') format('truetype');
-    font-weight: 100;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Thin.ttf') format('truetype');
+	font-weight: 100;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-ThinItalic.ttf') format('truetype');
-    font-weight: 100;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-ThinItalic.ttf') format('truetype');
+	font-weight: 100;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-ExtraBold.ttf') format('truetype');
-    font-weight: 800;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-ExtraBold.ttf') format('truetype');
+	font-weight: 800;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-ExtraBoldItalic.ttf') format('truetype');
-    font-weight: 800;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-ExtraBoldItalic.ttf') format('truetype');
+	font-weight: 800;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Hairline.ttf') format('truetype');
-    font-weight: 200;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Hairline.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-HairlineItalic.ttf') format('truetype');
-    font-weight: 200;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-HairlineItalic.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Italic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-LightItalic.ttf') format('truetype');
-    font-weight: 300;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-LightItalic.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Black.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-BlackItalic.ttf') format('truetype');
-    font-weight: 900;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-BlackItalic.ttf') format('truetype');
+	font-weight: 900;
+	font-style: italic;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Fractul';
-    src: url('./assets/fonts/Fractul-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
+	font-family: 'Fractul';
+	src: url('./assets/fonts/Fractul-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
 }
-
-
-
 
 .font-fractul {
-    font-family: 'Fractul','Courier New', Courier, monospace;
+	font-family: 'Fractul', 'Courier New', Courier, monospace;
 }
 
 .bn-container[data-changing-font-demo] .bn-editor * {
-   font-family: 'Fractul','Courier New', Courier, monospace;
+	font-family: 'Fractul', 'Courier New', Courier, monospace;
+}
+.separator {
+	margin-top: 0.1rem;
+	margin-bottom: 0.1rem;
+	height: 0px;
+	width: 100%;
+	border-top-width: 1px;
+	border-color: hsl(204 20% 88%);
+}
+
+.separator:where(.dark, .dark *) {
+	border-color: hsl(204 4% 28%);
+}
+
+.tooltip {
+	z-index: 50;
+	cursor: default;
+	border-radius: 0.375rem;
+	border-width: 1px;
+	border-color: hsl(204 20% 82%);
+	background-color: hsl(204 20% 94%);
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	color: black;
+	box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.tooltip:where(.dark, .dark *) {
+	border-color: hsl(204 4% 24%);
+	background-color: hsl(204 4% 16%);
+	color: white;
+	box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.15);
+}
+.menu {
+	position: relative;
+	z-index: 50;
+	display: flex;
+	max-height: var(--popover-available-height);
+
+	flex-direction: column;
+	overflow: auto;
+	overscroll-behavior: contain;
+	border-radius: 1rem;
+
+	border-width: 2px;
+	border-style: solid;
+	border-color: hsl(204 20% 88%);
+	background-color: white;
+	
+	color: black;
+	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+	outline: none !important;
+}
+
+.menu:where(.dark, .dark *) {
+	border-color: hsl(204 4% 24%);
+	background-color: hsl(204 4% 16%);
+	color: white;
+	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.menu-item {
+	display: flex;
+	cursor: default;
+	scroll-margin: 0.5rem;
+	align-items: center;
+	gap: 0.5rem;
+	border-radius: 0.25rem;
+	padding: 0.5rem;
+	outline: none !important;
+	font-family: 'Fractul', 'Courier New', Courier, monospace;
+	justify-content: start;
+}
+
+.menu-item[aria-disabled='true'] {
+	opacity: 0.25;
+}
+
+.menu-item[data-active-item] {
+	background-color: #ebebeb;
+}
+
+.menu-item:active,
+.menu-item[data-active] {
+	background-color: #eae6e6;
 }

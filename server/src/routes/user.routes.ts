@@ -2,14 +2,18 @@ import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { signinInput, signupInput } from '@whale_in_space/story-common';
 import { Hono } from 'hono';
-import { sign } from 'hono/jwt';
+import { sign, verify } from 'hono/jwt';
 type Bindings = {
 	DATABASE_URL: string;
 	JWT_SECRET: string;
 };
+type Variables = {
+	userId: string;
+};
 
 const user = new Hono<{
 	Bindings: Bindings;
+	Variables: Variables;
 }>();
 
 user
@@ -49,7 +53,6 @@ user
 			console.log('ji');
 			const newUser = await prisma.user.create({
 				data: {
-					
 					email: body.email,
 					FullName: body.FullName,
 					username: body.username,
@@ -134,4 +137,126 @@ user
 		}
 	});
 
+user.get(
+	'/me',
+	async (c, next) => {
+		const jwtToken = c.req.header('Authorization')?.replace('Bearer ', '');
+
+		if (!jwtToken) {
+			c.status(401);
+			return c.json({ error: 'unauthorized' });
+		}
+		try {
+			const payload = await verify(jwtToken, c.env.JWT_SECRET);
+
+			if (!(payload && payload.userId)) {
+				c.status(401);
+				return c.json({ error: 'unauthorized' });
+			}
+			c.set('userId', payload.userId);
+
+			await next();
+		} catch (error) {
+			c.status(401);
+			return c.json({ error: 'unauthorized' });
+		}
+	},
+	async (c) => {
+		const prisma = new PrismaClient({
+			datasourceUrl: c.env.DATABASE_URL,
+		}).$extends(withAccelerate());
+
+		try {
+			const user = await prisma.user.findUnique({
+				where: {
+					id: c.get('userId'),
+				},
+				select: {
+					id: true,
+					username: true,
+					email: true,
+					FullName: true,
+				},
+			});
+			if (!user) {
+				c.status(403);
+				return c.json({
+					error: 'user not found',
+				});
+			}
+
+			return c.json({ user, message: 'ok' });
+		} catch (error) {
+			return c.status(403);
+		}
+	}
+);
+user.get(
+	'/profile/:username',
+	async (c, next) => {
+		const jwtToken = c.req.header('Authorization')?.replace('Bearer ', '');
+
+		if (!jwtToken) {
+			c.status(401);
+			return c.json({ error: 'unauthorized' });
+		}
+		try {
+			const payload = await verify(jwtToken, c.env.JWT_SECRET);
+
+			if (!(payload && payload.userId)) {
+				c.status(401);
+				return c.json({ error: 'unauthorized' });
+			}
+			c.set('userId', payload.userId);
+
+			await next();
+		} catch (error) {
+			c.status(401);
+			return c.json({ error: 'unauthorized' });
+		}
+	},
+	async (c) => {
+		const prisma = new PrismaClient({
+			datasourceUrl: c.env.DATABASE_URL,
+		}).$extends(withAccelerate());
+		const username = c.req.param('username');
+		try {
+			const user = await prisma.user.findUnique({
+				where: {
+					username: username
+				},
+				select: {
+					id: true,
+					username: true,
+					email: true,
+					FullName: true,
+					blogs: {
+						select: {
+							id: true,
+							title: true,
+							publishedOn: true,
+							reads: true,
+							readTime: true,
+							category: true,
+							excerpt: true,
+						},
+						where: {
+							published: true,
+						},
+					},
+				},
+			});
+			if (!user) {
+				c.status(403);
+				return c.json({
+					error: 'user not found',
+				});
+			}
+
+			return c.json({ user, message: 'ok' });
+		} catch (error) {
+			return c.status(403);
+		}
+	}
+);
 export default user;

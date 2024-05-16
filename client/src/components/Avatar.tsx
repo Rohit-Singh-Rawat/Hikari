@@ -5,7 +5,7 @@ const Avatar = ({ name, className }: { name: string; className: string }) => {
 	return (
 		<div
 			className={cn(
-				'rounded-full flex capitalize  justify-center  items-center border-2 text-white bg-black border-black size-${size} cursor-pointer',
+				'rounded-full flex capitalize  justify-center  items-center border-2 text-white bg-black border-black  cursor-pointer',
 				className
 			)}
 		>

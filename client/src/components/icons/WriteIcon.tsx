@@ -1,3 +1,4 @@
+import { cn } from "../../utils/cn";
 
 
 const WriteIcon = ({ className }: { className?: string }) => {
@@ -7,7 +8,7 @@ const WriteIcon = ({ className }: { className?: string }) => {
 			enable-background='new 0 0 512 512'
 			viewBox='0 0 512 512'
 			id='Feather'
-			className={className}
+			className={cn('size-5', className)}
 		>
 			<path
 				d='M141.7,348.1c4.2-23,7.9-46.2,12.5-69.1c9.8-48.4,34.1-94.5,66.8-131.3c32.8-36.9,74.8-65.4,121.5-81.7

@@ -5,6 +5,8 @@ import Blog from './pages/Blog';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from './pages/Home';
 import NewStory from './pages/NewStory';
+import UserProfile from './pages/UserProfile';
+import Search from './pages/Search';
 
 function App() {
 	const queryClient = new QueryClient();
@@ -32,6 +34,14 @@ function App() {
 						<Route
 							path='/new-story'
 							element={<NewStory />}
+						/>
+						<Route
+							path='/search'
+							element={<Search />}
+						/>
+						<Route
+							path='/:username'
+							element={<UserProfile />}
 						/>
 					</Routes>
 				</BrowserRouter>
