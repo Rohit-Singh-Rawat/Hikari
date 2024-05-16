@@ -8,8 +8,10 @@ import { useState } from 'react';
 
 const NavBar = () => {
 	const [searchValue, setSearchValue] = useState<String>('');
+	
 
 	const navigate = useNavigate();
+	
 	return (
 		<nav className='flex justify-between p-2 border-b-stone-300 border-[0.1px] items-center px-4 lg:px-10'>
 			<Link to='/'>
@@ -42,7 +44,8 @@ const NavBar = () => {
 					<WriteIcon className='size-6' />
 					<p>Write</p>
 				</Link>
-				<Profile />
+				<Profile   />
+
 			</div>
 		</nav>
 	);

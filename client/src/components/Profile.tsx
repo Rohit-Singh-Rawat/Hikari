@@ -1,14 +1,17 @@
 import ProfileMenu from './ProfileMenu';
 import Avatar from './Avatar';
+import { User, useAuth } from '../Context/AuthContext';
 
 const Profile = () => {
+	const {user}=useAuth()
+	const localUser: User =  JSON.parse(localStorage.getItem('User') as string )
   return (
 		<ProfileMenu
-			userEmail='rohitsrawat3002@gmail.com'
-			userName='Rohit Singh Rawat'
+			userEmail={user?.email || localUser.email}
+			userName={user?.username || localUser.username}
 		>
 			<Avatar
-				name='Rohit'
+				name={user?.FullName || localUser.FullName}
 				className='size-7 md:size-8'
 			/>
 		</ProfileMenu>

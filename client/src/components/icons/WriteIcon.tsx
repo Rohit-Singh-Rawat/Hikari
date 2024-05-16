@@ -1,11 +1,10 @@
-import { cn } from "../../utils/cn";
-
+import { cn } from '../../utils/cn';
 
 const WriteIcon = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
-			enable-background='new 0 0 512 512'
+			enableBackground='new 0 0 512 512'
 			viewBox='0 0 512 512'
 			id='Feather'
 			className={cn('size-5', className)}

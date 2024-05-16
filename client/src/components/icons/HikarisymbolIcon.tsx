@@ -8,7 +8,7 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 			height='2846.6127881816788'
 			viewBox='139.4 88.7056869506836 61.2 72.58862609863282'
 			preserveAspectRatio='xMidYMid meet'
-			color-interpolation-filters='sRGB'
+			colorInterpolationFilters='sRGB'
 			className={className}
 		>
 			<g>
@@ -22,11 +22,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#fa71cd'
+							stopColor='#fa71cd'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#9b59b6'
+							stopColor='#9b59b6'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -38,11 +38,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#f9d423'
+							stopColor='#f9d423'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#f83600'
+							stopColor='#f83600'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -54,11 +54,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#0064d2'
+							stopColor='#0064d2'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#1cb0f6'
+							stopColor='#1cb0f6'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -70,11 +70,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#f00978'
+							stopColor='#f00978'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#3f51b1'
+							stopColor='#3f51b1'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -86,11 +86,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#7873f5'
+							stopColor='#7873f5'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#ec77ab'
+							stopColor='#ec77ab'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -102,11 +102,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#f9d423'
+							stopColor='#f9d423'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#e14fad'
+							stopColor='#e14fad'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -118,11 +118,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#009efd'
+							stopColor='#009efd'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#2af598'
+							stopColor='#2af598'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -134,11 +134,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#ffcc00'
+							stopColor='#ffcc00'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#00b140'
+							stopColor='#00b140'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -150,11 +150,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#d51007'
+							stopColor='#d51007'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#ff8177'
+							stopColor='#ff8177'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -166,11 +166,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#a2b6df'
+							stopColor='#a2b6df'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#0c3483'
+							stopColor='#0c3483'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -182,11 +182,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#7ac5d8'
+							stopColor='#7ac5d8'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#eea2a2'
+							stopColor='#eea2a2'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -198,11 +198,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#00ecbc'
+							stopColor='#00ecbc'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#007adf'
+							stopColor='#007adf'
 						></stop>
 					</linearGradient>
 					<linearGradient
@@ -214,11 +214,11 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					>
 						<stop
 							offset='0%'
-							stop-color='#b88746'
+							stopColor='#b88746'
 						></stop>{' '}
 						<stop
 							offset='100%'
-							stop-color='#fdf5a6'
+							stopColor='#fdf5a6'
 						></stop>
 					</linearGradient>
 				</defs>
@@ -229,8 +229,8 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 					<g>
 						<rect
 							fill='#000000'
-							fill-opacity='0'
-							stroke-width='2'
+							fillOpacity='0'
+							strokeWidth='2'
 							x='0'
 							y='0'
 							width='60'
@@ -251,9 +251,9 @@ const HikarisymbolIcon = ({ className }: { className?: string }) => {
 							>
 								<path
 									d='M350.16 326.59 349.07 325.61Q348.77 325.34 349.1 325.11 349.48 324.85 349.47 324.24A.96.66-61.3 0 0 349.45 324.05Q348.95 322.05 347.98 320.25 347.7 319.72 348.29 319.64L348.9 319.55Q349.51 319.46 349.56 318.85L349.74 316.74Q349.8 316.09 349.29 315.68 348.2 314.78 347.65 313.42A.95.95 0 0 1 348.61 312.12Q350.05 312.24 351.32 312.8 351.52 312.89 351.73 312.88 351.92 312.87 352.11 312.88 352.67 312.91 352.12 312.78 351.92 312.73 351.94 312.53 352.08 310.49 350 310.19 349.54 310.12 349.31 309.71 348.94 309.03 349.6 308.43 350.13 307.95 349.57 307.5L348.87 306.94M196.02 312.87Q196.02 312.96 195.75 313 195.51 313.05 195.52 313.29 195.53 313.43 195.66 313.52 196.04 313.77 195.63 313.97 195.44 314.06 195.35 314.25 195.09 314.74 195.61 314.53 196.02 314.36 196.47 314.62A.43.43 0 0 1 196.46 315.37Q196.14 315.54 196.39 315.73 196.94 316.13 196.36 316.49 195.36 317.1 195.56 318.25 195.63 318.64 195.35 318.92C193.79 320.51 192.2 321.78 193.31 324.29A.38.38 0 0 1 193.02 324.82Q192.12 324.94 192.16 325.82 192.18 326.37 191.76 326.71L190.01 328.13Q189.4 328.62 190.16 328.84 190.29 328.88 190.45 328.88 191.19 328.89 190.92 329.58 190.68 330.21 189.97 330.25M34.0765 471.0567A1.93.75 128.2 0 0 35.8594 470.0038 1.93.75 128.2 0 0 36.4635 468.0233 1.93.75 128.2 0 0 34.6806 469.0762 1.93.75 128.2 0 0 34.0765 471.0567'
-									stroke-width='2'
+									strokeWidth='2'
 									fill='none'
-									stroke-linecap='butt'
+									strokeLinecap='butt'
 									stroke='#000000'
 								></path>
 								<path

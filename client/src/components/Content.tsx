@@ -47,7 +47,7 @@ const redTheme = {
 	dark: darkRedTheme,
 };
 
-export default function Content({editor, onChange}:{editor:any, onChange:()=>void}) {
+export default function Content({editor, onChange}:{editor:any, onChange?:()=>void}) {
 
 	return (
 		<BlockNoteView

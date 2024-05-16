@@ -2,7 +2,7 @@ const TimeIcon = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
-			enable-background='new 0 0 24 24'
+			enableBackground='new 0 0 24 24'
 			viewBox='0 0 24 24'
 			id='Time'
 			className={className}
@@ -17,12 +17,12 @@ const TimeIcon = ({ className }: { className?: string }) => {
 			>
 				<stop
 					offset='.198'
-					stop-color='#000000'
+					stopColor='#000000'
 					className='stopColor60d3fc svgShape'
 				></stop>
 				<stop
 					offset='.872'
-					stop-color='#b3b3b3'
+					stopColor='#b3b3b3'
 					className='stopColorfc6bf8 svgShape'
 				></stop>
 			</linearGradient>

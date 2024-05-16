@@ -39,7 +39,7 @@ export default function ProfileMenu({
 				gutter={4}
 			>
 				<div className='p-[1em] text-xs sm:text-sm max-w-[280px] truncate flex flex-col gap-1'>
-					<div className='font-medium'>{userName}</div>
+					<div className='font-medium'>@{userName}</div>
 					<div className='text-gray-600'>{userEmail}</div>
 				</div>
 				<Link to={'/new-story'}>

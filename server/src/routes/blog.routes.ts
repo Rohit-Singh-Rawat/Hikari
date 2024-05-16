@@ -175,6 +175,32 @@ blog
 			});
 		}
 	})
+	.get('/:id/edit', async (c) => {
+		const userId = c.get('userId');
+		const blogId = c.req.param('id');
+		const prisma = new PrismaClient({
+			datasourceUrl: c.env.DATABASE_URL,
+		}).$extends(withAccelerate());
+		try {
+			const blog = await prisma.blog.findUnique({
+				where: { authorId:userId, id: blogId }
+			});
+			if (!blog) {
+				c.status(403);
+				return c.json({
+					error: 'blog not found',
+				});
+			}
+			return c.json({
+				blog: blog,
+			});
+		} catch (error) {
+			c.status(400);
+			c.json({
+				msg: 'failed to fetch blog or blog not exist',
+			});
+		}
+	})
 	.get('/:id', async (c) => {
 		const userId = c.get('userId');
 		const blogId = c.req.param('id');

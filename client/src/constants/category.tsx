@@ -1,4 +1,12 @@
-export const categories = {
+export const categories: Record<
+	string,
+	{
+		name: string;
+		icon: string;
+		color: string;
+		description: string;
+	}
+> = {
 	lifestyle: {
 		name: 'Lifestyle',
 		icon: '🌱',

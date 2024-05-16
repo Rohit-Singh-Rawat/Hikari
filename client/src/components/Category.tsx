@@ -1,12 +1,12 @@
 import * as Ariakit from '@ariakit/react';
-import './style.css';
+import '../index.css';
 import { categories } from '../constants/category';
 
 export default function Category() {
 	return (
-		<div className='wrapper'>
-			<Ariakit.SelectProvider defaultValue='Apple'>
-				<Ariakit.SelectLabel className='label'>Favorite fruit</Ariakit.SelectLabel>
+		<div className='wrapper '>
+			<Ariakit.SelectProvider defaultValue='None' >
+				<Ariakit.SelectLabel className='label'>Category</Ariakit.SelectLabel>
 				<Ariakit.Select className='button' />
 				<Ariakit.SelectPopover
 					portal
@@ -15,13 +15,19 @@ export default function Category() {
 					gutter={4}
 					className='popover'
 				>
-					{categories.map(category)=>{
-						
-					}}
+					{' '}
 					<Ariakit.SelectItem
-						className='select-item'
-						value='Apple'
+						className='select-item flex '
+						value={'None'}
 					/>
+					{Object.keys(categories).map((category) => {
+						return (
+							<Ariakit.SelectItem
+								className='select-item flex '
+								value={`${categories[category].icon}  ${categories[category].name}`}
+							/>
+						);
+					})}
 				</Ariakit.SelectPopover>
 			</Ariakit.SelectProvider>
 		</div>
