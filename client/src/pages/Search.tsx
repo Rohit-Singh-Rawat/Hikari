@@ -36,7 +36,7 @@ const Search = () => {
 			<NavBar />
 			<div className='w-full flex justify-center '>
 				<div className='min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl border-b-2 flex flex-col  gap-5 lg:gap-10 pt-5 lg:pt-10 '>
-					<h1 className='lg:text-5xl text-3xl text-[#7c7c7c] text-start font-semibold lg:underline-offset-8 lg:px-10'>
+					<h1 className='lg:text-5xl text-3xl text-[#7c7c7c] text-start font-semibold max-w-full truncate lg:underline-offset-8 lg:px-10'>
 						Results for <span className='text-black lg:text-6xl text-4xl'>{queryValue}</span>
 					</h1>
 					<div>

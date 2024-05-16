@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import HikariIcon from './icons/HikariIcon';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
-import { SignupType } from '@whale_in_space/story-common';
+import { SignupType } from '@whale_in_space/hikari-common';
 
 const SignUpBlock = () => {
 	const [signupInputs, setSignupInputs] = useState<SignupType>({
@@ -33,8 +33,9 @@ const SignUpBlock = () => {
 		onSettled: () => {
 			toast.dismiss();
 		},
-		onError: (error) => {
-			toast.error(error.message || 'Error');
+		onError: (error:AxiosError<{error?:String}>) => {
+			console.log(error.response)
+			toast.error(error.response?.data?.error as String ||error.message|| 'Error');
 		},
 		onSuccess: (data) => {
 			localStorage.setItem('token', data.data.jwt);

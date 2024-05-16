@@ -15,9 +15,11 @@
     "@blocknote/mantine": "^0.13.2",
     "@blocknote/react": "^0.13.2",
     "@tanstack/react-query": "^5.35.5",
-    "@whale_in_space/story-common": "^1.0.1",
+    "@types/lodash.debounce": "^4.0.9",
+    "@whale_in_space/hikari-common": "^1.0.0",
     "axios": "^1.6.8",
     "clsx": "^2.1.1",
+    "lodash.debounce": "^4.0.8",
     "react-router-dom": "^6.23.1",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0"

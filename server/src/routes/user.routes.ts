@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
-import { signinInput, signupInput } from '@whale_in_space/story-common';
+import { signinInput, signupInput } from '@whale_in_space/hikari-common';
 import { Hono } from 'hono';
 import { sign, verify } from 'hono/jwt';
 type Bindings = {
@@ -27,10 +27,7 @@ user
 		const { success, error } = signupInput.safeParse(body);
 		if (!success) {
 			c.status(411);
-			console.log(error);
-			return c.json({
-				msg: error || 'Inputs are wrong',
-			});
+			return c.json({ error: error.errors[0].message || 'Invalid Inputs' });
 		}
 		console.log('object');
 		try {
@@ -70,8 +67,9 @@ user
 				jwt: token,
 			});
 		} catch (error) {
-			console.log(error);
-			return c.status(403);
+			c.status(403);
+			console.log(error)
+			return c.json({ error:'User Already Exist with username or Email' });
 		}
 	})
 
@@ -83,16 +81,15 @@ user
 		const { success, error } = signinInput.safeParse(body);
 		if (!success) {
 			c.status(411);
-			return c.json({
-				msg: error || 'Inputs are wrong',
-			});
+			return c.json({error:error.errors[0].message || 'Invalid Inputs'});
+			
 		}
 
 		try {
-			const user = await prisma.user.findUnique({
+			const user = await prisma.user.findFirst({
 				where: {
-					email: body.email,
-				},
+					OR: [{ email: body.ValidityState }, { username: body.ValidityState }],
+				} ,
 			});
 			if (!user) {
 				c.status(403);
@@ -223,7 +220,7 @@ user.get(
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
-					username: username
+					username: username,
 				},
 				select: {
 					id: true,

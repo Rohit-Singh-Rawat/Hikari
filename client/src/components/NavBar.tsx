@@ -16,9 +16,9 @@ const NavBar = () => {
 				<HikariIcon className='w-28 h-12 lg:block hidden' />
 				<HikarisymbolIcon className='size-5 block lg:hidden' />
 			</Link>
-			<div className='flex lg:gap-10 items-center lg:items-end'>
+			<div className='flex md:gap-5 lg:gap-10 items-center lg:items-end'>
 				<form
-					className='flex justify-center items-end lg:border-b-[0.1px] border-y-gray-400 lg:pb-2 px-5'
+					className='flex justify-center gap-3 items-end lg:border-b-[0.1px] border-y-gray-400 lg:pb-2 px-5'
 					onSubmit={(e) => {
 						e.preventDefault();
 						navigate(`/search?q=${searchValue}`);
@@ -37,7 +37,7 @@ const NavBar = () => {
 				</form>
 				<Link
 					to='/new-story'
-					className='lg:flex gap-2 justify-center items-end cursor-pointer opacity-70 hover:opacity-100 hidden '
+					className='md:flex gap-2 justify-center items-end cursor-pointer opacity-70 hover:opacity-100 hidden '
 				>
 					<WriteIcon className='size-6' />
 					<p>Write</p>

@@ -3,30 +3,29 @@ import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { BlogPropsType } from '../types/Blogprops.type';
-import blogs from '../temp';
 
 const Home = () => {
-	// const {
-	// 	isLoading,
-	// 	error,
-	// 	isError,
-	// 	data: blogs,
-	// } = useQuery({
-	// 	queryKey: ['blogs'],
-	// 	queryFn: async () => {
-	// 		const token = localStorage.getItem('token');
-	// 		const response = await axios.get('http://127.0.0.1:8787/api/v1/blog/bulk', {
-	// 			headers: {
-	// 				Authorization	: token,
-	// 			},
-	// 		});
+	const {
+		isLoading,
+		error,
+		isError,
+		data: blogs,
+	} = useQuery({
+		queryKey: ['blogs'],
+		queryFn: async () => {
+			const token = localStorage.getItem('token');
+			const response = await axios.get('http://127.0.0.1:8787/api/v1/blog/bulk', {
+				headers: {
+					Authorization	: token,
+				},
+			});
 
-	// 		return response;
-	// 	},
-	// });
-	// console.log(blogs)
-	// if(isError) return <div>error</div>
-	// if (isLoading) return <div>Loading</div>
+			return response;
+		},
+	});
+	console.log(blogs)
+	if(isError) return <div>error</div>
+	if (isLoading) return <div>Loading</div>
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
 			<NavBar />
@@ -35,7 +34,7 @@ const Home = () => {
 					Blogs
 				</h1>
 				<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
-					{blogs.map((blog: any) => {
+					{blogs?.data?.blogs?.map((blog: any) => {
 						return (
 							<BlogBlock
 								reads={blog.reads}

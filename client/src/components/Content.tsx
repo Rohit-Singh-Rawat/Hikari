@@ -1,6 +1,7 @@
 import '@blocknote/core/fonts/inter.css';
 import { useCreateBlockNote } from '@blocknote/react';
 import '@blocknote/mantine/style.css';
+
 import { BlockNoteView, lightDefaultTheme, Theme } from '@blocknote/mantine';
 const lightRedTheme = {
 	colors: {
@@ -46,13 +47,15 @@ const redTheme = {
 	dark: darkRedTheme,
 };
 
-export default function Content() {
-	const editor = useCreateBlockNote();
+export default function Content({editor, onChange}:{editor:any, onChange:()=>void}) {
 
 	return (
 		<BlockNoteView
 			editor={editor}
 			theme={redTheme}
+			onChange={onChange}
+			
+			
 			className='w-full  min-h-[calc(100dvh-265px)] border-[#f1f5f9] font-fractul rounded-2xl lg:my-10 lg:border-2 lg:px-2 py-5 lg:shadow-md'
 			data-changing-font-demo
 		/>

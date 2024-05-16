@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import HikariIcon from './icons/HikariIcon';
 import { Link, useNavigate } from 'react-router-dom';
 import LabelledButton from './LabelledButton';
-import { SigninType } from '@whale_in_space/story-common';
+import { SigninType } from '@whale_in_space/hikari-common';
 import { Toaster, toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const SignInBlock = () => {
 	const [signinInputs, setSigninTnputs] = useState<SigninType>({
-		email: '',
+		ValidityState: '',
 		password: '',
 	});
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: (event: React.FocusEvent<HTMLFormElement>) => {
 			event.preventDefault();
-			if (signinInputs.email.trim() === '' || signinInputs.password.trim() === '') {
+			if (signinInputs.ValidityState.trim() === '' || signinInputs.password.trim() === '') {
 				throw new Error('Please fill out all required fields');
 			}
 			toast.loading('Signing In...');
@@ -26,8 +26,8 @@ const SignInBlock = () => {
 		onSettled: () => {
 			toast.dismiss();
 		},
-		onError: (error) => {
-			toast.error(error.message || 'Error');
+		onError: (error: AxiosError<{ error: String }>) => {
+			toast.error((error.response?.data?.error as String) || error.message || 'Error');
 		},
 		onSuccess: (data) => {
 			localStorage.setItem('token', data.data.jwt);
@@ -60,7 +60,7 @@ const SignInBlock = () => {
 						type='text'
 						placeHolder='Enter your username or email'
 						onChange={(e) => {
-							setSigninTnputs((c) => ({ ...c, email: e.target.value }));
+							setSigninTnputs((c) => ({ ...c, ValidityState: e.target.value }));
 						}}
 					/>
 					<LabelledButton
