@@ -2,7 +2,7 @@ import HikariIcon from '../components/icons/HikariIcon';
 import Content from '../components/Content';
 import Profile from '../components/Profile';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 import { Toaster, toast } from 'sonner';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -24,7 +24,7 @@ const EditBlog = () => {
 	const { id } = useParams();
 
 	const { isLoading, error, isError, isSuccess, data } = useQuery({
-		queryKey: ['blogs', id],
+		queryKey: ['editBlog', id],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
 			const response = await axios.get(`http://127.0.0.1:8787/api/v1/blog/${id}/edit`, {
@@ -43,7 +43,8 @@ const EditBlog = () => {
 			if (title.trim() === '' || content.trim() === '') {
 				throw new Error('Title and Content needed');
 			}
-			toast.loading('Saving to draft...');
+
+			toast.loading(data.blog.published? 'Updating blog...':'Saving to draft...');
 			return axios.put(
 				`http://127.0.0.1:8787/api/v1/blog`,
 				{
@@ -145,7 +146,10 @@ const EditBlog = () => {
 			<Toaster />
 			<div className='flex w-full flex-col items-center font-fractul gap-10 min-h-screen'>
 				<div className='flex py-5 items-center px-5 lg:px-0 min-w-full max-w-full md:max-w-2xl md:min-w-[672px] lg:max-w-4xl lg:min-w-[896px] justify-between'>
-					<HikariIcon className='h-10 w-32' />
+					<Link to='/'>
+						<HikariIcon className='h-10 w-32' />
+					</Link>
+
 					<div className='flex items-center gap-10'>
 						<button
 							className={cn(

@@ -3,7 +3,7 @@ import Content from '../components/Content';
 import Profile from '../components/Profile';
 import { useCreateBlockNote } from '@blocknote/react';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 import { Toaster, toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
@@ -81,7 +81,9 @@ const NewStory = () => {
 			<Toaster />
 			<div className='flex w-full flex-col items-center font-fractul gap-10 min-h-screen '>
 				<div className='flex py-5 items-center px-5 lg:px-0 min-w-full max-w-full md:max-w-2xl md:min-w-[672px] lg:max-w-4xl lg:min-w-[896px] justify-between '>
-					<HikariIcon className='h-10 w-32' />
+					<Link to='/'>
+						<HikariIcon className='h-10 w-32' />
+					</Link>
 					<div className='flex items-center gap-10'>
 						<div className='rounded-2xl bg-green-400 px-2 text-sm py-[2px]'>Publish</div>
 						<Profile />

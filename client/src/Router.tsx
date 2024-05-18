@@ -10,13 +10,17 @@ import Search from './pages/Search';
 import EditBlog from './pages/EditBlog';
 import { useAuth } from './Context/AuthContext';
 export const Router = () => {
-  const {isLoading}= useAuth()
-  if(isLoading){
-    return <>Loading</>
-  }
+	const { isLoading, authenticated } = useAuth();
+	if (isLoading) {
+		return <>Loading</>;
+	}
 	return (
 		<BrowserRouter>
 			<Routes>
+				<Route
+					path='/'
+					element={authenticated ? <Home /> : <Signin />}
+				/>
 				<Route
 					path='/signup'
 					element={<Signup />}
@@ -24,10 +28,6 @@ export const Router = () => {
 				<Route
 					path='/signin'
 					element={<Signin />}
-				/>
-				<Route
-					path='/blogs'
-					element={<Home />}
 				/>
 				<Route
 					path='/blog/:id'

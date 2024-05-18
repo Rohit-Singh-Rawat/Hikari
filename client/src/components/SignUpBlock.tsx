@@ -41,7 +41,7 @@ const SignUpBlock = () => {
 
 			toast.success('Signed In successfully');
 			setTimeout(() => {
-				navigate('/blogs');
+				navigate('/');
 			}, 500);
 		},
 	});

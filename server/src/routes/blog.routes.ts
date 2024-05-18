@@ -20,6 +20,8 @@ const blog = new Hono<{
 
 blog.use('/*', async (c, next) => {
 	const jwtToken = c.req.header('Authorization')?.replace('Bearer ', '');
+	
+		console.log('object');
 	if (!jwtToken) {
 		c.status(401);
 		return c.json({ error: 'unauthorized' });
@@ -81,7 +83,6 @@ blog
 		}
 	})
 	.post('/publish/:id', async (c) => {
-		
 		const userId = c.get('userId');
 
 		const blogId = c.req.param('id');
@@ -117,18 +118,19 @@ blog
 			});
 		}
 		const content = getContentFromObjects(JSON.parse(body.content));
+		console.log(content.slice(0,100))
 		try {
 			const blog = await prisma.blog.update({
 				where: { id: body.id, authorId: userId },
 				data: {
 					title: body.title,
-
 					content: body.content,
 					readTime: calculateReadTime({ heading: body.title, content: content }),
-					excerpt: content.slice(100),
+					excerpt: content.slice(0,100),
 					category: body.category || null,
 				},
 			});
+			console.log(blog.excerpt)
 			return c.json({
 				id: blog.id,
 			});
@@ -181,7 +183,7 @@ blog
 		}).$extends(withAccelerate());
 		try {
 			const blog = await prisma.blog.findUnique({
-				where: { authorId:userId, id: blogId }
+				where: { authorId: userId, id: blogId },
 			});
 			if (!blog) {
 				c.status(403);
@@ -196,6 +198,103 @@ blog
 			c.status(400);
 			c.json({
 				msg: 'failed to fetch blog or blog not exist',
+			});
+		}
+	})
+
+	.get('/search', async (c) => {
+		const query = c.req.query('q');
+		const searchQuery = (query?.split(' ') || []).join(' | ');
+		const prisma = new PrismaClient({
+			datasourceUrl: c.env.DATABASE_URL,
+		}).$extends(withAccelerate());
+		console.log(searchQuery)
+		if(!query)return
+		try {
+			 const blogs = await prisma.blog.findMany({
+					where: {
+						published: true,
+						OR: [
+							{
+								title: {
+									search: searchQuery,
+								},
+							},
+							{
+								content: {
+									search: searchQuery,
+								},
+							},
+						],
+					},
+					orderBy: {
+						_relevance: {
+							fields: ['title', 'content'],
+							search: searchQuery,
+							sort: 'asc',
+						},
+					},
+					select: {
+						author: {
+							select: {
+								id: true,
+								username: true,
+								FullName: true,
+							},
+						},
+						excerpt: true,
+						content: true,
+						publishedOn: true,
+						id: true,
+						reads: true,
+						title: true,
+						readTime: true,
+					},
+				});
+			return c.json({
+				blogs: blogs,
+			});
+		} catch (error) {
+			c.status(400);
+			c.json({
+				msg: 'failed to fetch blog or blog not exist',
+			});
+		}
+	})
+	.get('/stories', async (c) => {
+		const userId = c.get('userId');
+		const prisma = new PrismaClient({
+			datasourceUrl: c.env.DATABASE_URL,
+		}).$extends(withAccelerate());
+		try {
+			const blogs = await prisma.blog.findMany({
+				where: { authorId: userId },
+				select: {
+					author: {
+						select: {
+							id: true,
+							username: true,
+							FullName: true,
+						},
+					},
+					category: true,
+					excerpt: true,
+					publishedOn: true,
+					id: true,
+					published: true,
+					reads: true,
+					title: true,
+					readTime: true,
+				},
+			});
+
+			return c.json({
+				blogs: blogs,
+			});
+		} catch (error) {
+			c.status(400);
+			c.json({
+				msg: 'failed to fetch blogs',
 			});
 		}
 	})
@@ -245,85 +344,6 @@ blog
 			c.status(400);
 			c.json({
 				msg: 'failed to fetch blog or blog not exist',
-			});
-		}
-	})
-	.get('/search', async (c) => {
-		const query = c.req.query('q');
-		const searchQuery = (query?.split(' ') || []).join(' | ');
-		const prisma = new PrismaClient({
-			datasourceUrl: c.env.DATABASE_URL,
-		}).$extends(withAccelerate());
-		try {
-			const blog = await prisma.blog.findMany({
-				orderBy: {
-					_relevance: {
-						fields: ['title', 'content'],
-						search: searchQuery,
-						sort: 'asc',
-					},
-				},
-				select: {
-					author: {
-						select: {
-							id: true,
-							username: true,
-							FullName: true,
-						},
-					},
-					category: true,
-					content: true,
-					publishedOn: true,
-					id: true,
-					reads: true,
-					title: true,
-					readTime: true,
-				},
-			});
-			return c.json({
-				blog: blog,
-			});
-		} catch (error) {
-			c.status(400);
-			c.json({
-				msg: 'failed to fetch blog or blog not exist',
-			});
-		}
-	})
-	.get('/stories', async (c) => {
-		const userId = c.get('userId');
-		const prisma = new PrismaClient({
-			datasourceUrl: c.env.DATABASE_URL,
-		}).$extends(withAccelerate());
-		try {
-			const blogs = await prisma.blog.findMany({
-				where: { authorId: userId },
-				select: {
-					author: {
-						select: {
-							id: true,
-							username: true,
-							FullName: true,
-						},
-					},
-					category: true,
-					excerpt: true,
-					publishedOn: true,
-					id: true,
-					published: true,
-					reads: true,
-					title: true,
-					readTime: true,
-				},
-			});
-
-			return c.json({
-				blogs: blogs,
-			});
-		} catch (error) {
-			c.status(400);
-			c.json({
-				msg: 'failed to fetch blogs',
 			});
 		}
 	});

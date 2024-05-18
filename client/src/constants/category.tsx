@@ -68,7 +68,7 @@ export const categories: Record<
 	[Category.SELF_IMPROVEMENT]: {
 		name: 'Self-Improvement',
 		icon: '🌟',
-		color: 'bg-yellow-300',
+		color: 'bg-yellow-700 ',
 		description:
 			'Discussing productivity hacks, mindfulness techniques, goal setting, mental health awareness, and self-care practices.',
 	},

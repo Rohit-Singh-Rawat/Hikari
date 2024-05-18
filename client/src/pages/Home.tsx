@@ -37,9 +37,10 @@ const Home = () => {
 						return (
 							<BlogBlock
 								reads={blog.reads}
-								content={blog.content}
-								id={blog.authorId}
-								heading={blog.heading}
+								excerpt={blog.excerpt}
+								id={blog.id}
+								readTime={blog.readTime}
+								title={blog.title}
 								publishedOn={blog.publishedOn}
 								category={blog.category}
 								author={blog.author}

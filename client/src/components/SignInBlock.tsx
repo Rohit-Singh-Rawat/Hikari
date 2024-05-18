@@ -33,7 +33,7 @@ const SignInBlock = () => {
 			localStorage.setItem('token', data.data.jwt);
 			toast.success('Signed In successfully');
 			setTimeout(() => {
-				navigate('/blogs');
+				navigate('/');
 			}, 500);
 		},
 	});

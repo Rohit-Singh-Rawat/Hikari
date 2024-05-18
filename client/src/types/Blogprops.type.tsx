@@ -3,7 +3,7 @@ import { categories } from '../constants/category';
 export type BlogPropsType = {
 	id: string;
 	publishedOn: Date;
-	content: string;
+	excerpt: string;
 	readTime: number;
 	title: string;
 	reads: number;
