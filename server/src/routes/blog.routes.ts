@@ -20,7 +20,6 @@ const blog = new Hono<{
 
 blog.use('/*', async (c, next) => {
 	const jwtToken = c.req.header('Authorization')?.replace('Bearer ', '');
-
 	if (!jwtToken) {
 		c.status(401);
 		return c.json({ error: 'unauthorized' });
@@ -58,7 +57,6 @@ blog
 		}
 
 		const content = getContentFromObjects(JSON.parse(body.content));
-
 		try {
 			const blog = await prisma.blog.create({
 				data: {
@@ -67,12 +65,11 @@ blog
 					authorId: userId,
 					readTime: calculateReadTime({ heading: body.title, content: content }),
 					reads: 0,
-					excerpt: content.slice(100),
-					category: body.category,
+					excerpt: content.slice(0, 100),
+					category: body.category || null,
 					published: body.published || false,
 				},
 			});
-
 			return c.json({
 				id: blog.id,
 			});
@@ -84,6 +81,7 @@ blog
 		}
 	})
 	.post('/publish/:id', async (c) => {
+		
 		const userId = c.get('userId');
 
 		const blogId = c.req.param('id');
@@ -128,7 +126,7 @@ blog
 					content: body.content,
 					readTime: calculateReadTime({ heading: body.title, content: content }),
 					excerpt: content.slice(100),
-					category: body.category,
+					category: body.category || null,
 				},
 			});
 			return c.json({

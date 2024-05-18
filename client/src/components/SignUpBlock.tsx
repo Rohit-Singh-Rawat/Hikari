@@ -34,7 +34,6 @@ const SignUpBlock = () => {
 			toast.dismiss();
 		},
 		onError: (error:AxiosError<{error?:String}>) => {
-			console.log(error.response)
 			toast.error(error.response?.data?.error as String ||error.message|| 'Error');
 		},
 		onSuccess: (data) => {

@@ -1,1 +1,64 @@
-src
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+*.lcov
+
+# Source maps
+*.map
+
+# Build directory
+dist/
+build/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
+# Configuration files
+*.env
+*.local
+
+# Git files
+.git/
+.gitignore
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+
+# Documentation
+docs/
+
+# System files
+npm-debug.log*
+yarn-error.log*
+.yarn-integrity
+
+# Ignore scripts
+scripts/
+
+# Ignore config files
+*.config.js
+tsconfig.json
+webpack.config.js
+rollup.config.js
+
+# Ignore TypeScript files if you're only publishing the compiled JavaScript
+src/**/*.ts
+src/**/*.tsx
+
+# Ignore test files
+test/
+tests/
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts

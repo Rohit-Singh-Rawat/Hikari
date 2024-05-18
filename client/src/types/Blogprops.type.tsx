@@ -1,15 +1,18 @@
-import { categories } from "../constants/category";
+import { categories } from '../constants/category';
 
 export type BlogPropsType = {
 	id: string;
 	publishedOn: Date;
 	content: string;
-	heading: string;
+	readTime: number;
+	title: string;
 	reads: number;
+	
 	category?: keyof typeof categories;
 	author: {
 		id: string;
-		name: string;
-		avatarUrl: string;
+		username: string;
+		FullName: string;
+		email: string;
 	};
 };

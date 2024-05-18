@@ -232,13 +232,14 @@
   height: 2.5rem;
   user-select: none;
   align-items: center;
+
   gap: 0.25rem;
   white-space: nowrap;
   border-radius: 0.5rem;
   border-style: none;
   background-color: white;
   padding-left: 0.5rem;
-  padding-right: 2rem;
+  padding-right: 0.5rem;
   font-size: 1rem;
   line-height: 1.5rem;
   color: black;
@@ -251,7 +252,8 @@
     inset 0 2px 0 var(--highlight),
     inset 0 -1px 0 var(--shadow),
     0 1px 1px var(--shadow);
-  width: 200px;
+  width: 250px;
+	max-width: 300px;
   justify-content: space-between;
 }
 

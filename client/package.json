@@ -16,7 +16,7 @@
     "@blocknote/react": "^0.13.2",
     "@tanstack/react-query": "^5.35.5",
     "@types/lodash.debounce": "^4.0.9",
-    "@whale_in_space/hikari-common": "^1.0.0",
+    "@whale_in_space/hikari-common": "^1.0.3",
     "axios": "^1.6.8",
     "clsx": "^2.1.1",
     "lodash.debounce": "^4.0.8",

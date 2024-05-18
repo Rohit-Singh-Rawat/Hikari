@@ -23,7 +23,6 @@ const Home = () => {
 			return response;
 		},
 	});
-	console.log(blogs)
 	if(isError) return <div>error</div>
 	if (isLoading) return <div>Loading</div>
 	return (

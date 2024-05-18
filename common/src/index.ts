@@ -1,18 +1,19 @@
 import z from 'zod';
 
 export enum Category {
-	LIFESTYLE = 'LIFESTYLE',
-	TECHNOLOGY = 'TECHNOLOGY',
-	FASHION = 'FASHION',
-	FOOD_AND_COOKING = 'FOOD_AND_COOKING',
-	FINANCE_AND_BUSINESS = 'FINANCE_AND_BUSINESS',
-	TRAVEL = 'TRAVEL',
-	PARENTING = 'PARENTING',
-	DIY_AND_CRAFTS = 'DIY_AND_CRAFTS',
-	SELF_IMPROVEMENT = 'SELF_IMPROVEMENT',
-	ENTERTAINMENT = 'ENTERTAINMENT',
-	OTHERS = 'OTHERS',
+	LIFESTYLE = 'lifestyle',
+	TECHNOLOGY = 'technology',
+	FASHION = 'fashion',
+	FOOD_AND_COOKING = 'food_and_cooking',
+	FINANCE_AND_BUSINESS = 'finance_and_business',
+	TRAVEL = 'travel',
+	PARENTING = 'parenting',
+	DIY_AND_CRAFTS = 'diy_and_crafts',
+	SELF_IMPROVEMENT = 'self_improvement',
+	ENTERTAINMENT = 'entertainment',
+	OTHERS = 'others',
 }
+
 export const signupInput = z.object({
 	email: z.string().email(),
 		password: z

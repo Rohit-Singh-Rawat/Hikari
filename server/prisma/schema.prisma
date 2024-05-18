@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-    previewFeatures = ["fullTextSearch"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -25,17 +25,18 @@ model User {
 }
 
 enum Category {
-  LIFESTYLE
-  TECHNOLOGY
-  FASHION
-  FOOD_AND_COOKING
-  FINANCE_AND_BUSINESS
-  TRAVEL
-  PARENTING
-  DIY_AND_CRAFTS
-  SELF_IMPROVEMENT
-  ENTERTAINMENT
-  OTHERS
+  lifestyle
+  technology
+  fashion
+  food_and_cooking
+  finance_and_business
+  travel
+  parenting
+  diy_and_crafts
+  self_improvement
+  entertainment
+  others
+  
 }
 
 model Blog {
@@ -48,6 +49,6 @@ model Blog {
   publishedOn DateTime  @default(now())
   author      User      @relation(fields: [authorId], references: [id])
   authorId    String
-  excerpt     String  @default("")
+  excerpt     String    
   category    Category?
 }

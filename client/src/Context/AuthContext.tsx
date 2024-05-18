@@ -31,12 +31,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	const [user, setUser] = useState<User | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isError, setIsError] = useState<boolean>(false);
-	console.log('object');
+	
 	useEffect(() => {
-		console.log('objecefwewet');
-	}, []);
-	useEffect(() => {
-		console.log('hi');
 		const verifyToken = async () => {
 			setIsLoading(true);
 			try {
@@ -75,7 +71,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
 		verifyToken();
 	}, []);
-	console.log('qobject');
 	const login = (token: string) => {
 		localStorage.setItem('token', token);
 		setToken(token);

@@ -29,7 +29,6 @@ user
 			c.status(411);
 			return c.json({ error: error.errors[0].message || 'Invalid Inputs' });
 		}
-		console.log('object');
 		try {
 			const salt = crypto.getRandomValues(new Uint8Array(16));
 
@@ -47,7 +46,6 @@ user
 				.map((byte) => byte.toString(16).padStart(2, '0'))
 				.join('');
 
-			console.log('ji');
 			const newUser = await prisma.user.create({
 				data: {
 					email: body.email,
@@ -68,7 +66,6 @@ user
 			});
 		} catch (error) {
 			c.status(403);
-			console.log(error)
 			return c.json({ error:'User Already Exist with username or Email' });
 		}
 	})
