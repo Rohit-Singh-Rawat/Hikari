@@ -8,13 +8,14 @@ import Avatar from '../components/Avatar';
 import { useCreateBlockNote } from '@blocknote/react';
 import { useEffect, useMemo, useState } from 'react';
 import '../default.css';
-import { useAuth } from '../Context/AuthContext';
 import { useParams } from 'react-router-dom';
 import { BlockNoteEditor } from '@blocknote/core';
+import { Link, Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext';
 const Blog = () => {
 	const [html, setHTML] = useState<string>('');
 	const [blog, setBlog] = useState<BlogPropsType>();
-	const { id } = useParams();
+	const { id } = useParams();const { authenticated } = useAuth();
 	const { isLoading, error, isError, isSuccess, data } = useQuery({
 		queryKey: ['blogs', id],
 		queryFn: async () => {
@@ -47,7 +48,14 @@ const Blog = () => {
 	if (isLoading) {
 		return <>loading</>;
 	}
-
+if (!authenticated) {
+	return (
+		<Navigate
+			to='/signin'
+			replace={true}
+		/>
+	);
+}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
 			<NavBar />

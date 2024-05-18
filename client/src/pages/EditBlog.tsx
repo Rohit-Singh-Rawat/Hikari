@@ -12,6 +12,7 @@ import {  BlockNoteEditor} from '@blocknote/core';
 import { Category } from '@whale_in_space/hikari-common';
 import CategoryInput from '../components/CategoryInput';
 import { cn } from '../utils/cn';
+import {  Navigate, useLocation } from 'react-router-dom';
 
 const EditBlog = () => {
 	const [content, setContent] = useState<string>('');
@@ -20,7 +21,7 @@ const EditBlog = () => {
 	const [category, setCategory] = useState<Category>();
 	const navigate = useNavigate();
 
-	const { user, isLoading: pageLoading } = useAuth();
+	const { user, isLoading: pageLoading,authenticated } = useAuth();
 	const { id } = useParams();
 
 	const { isLoading, error, isError, isSuccess, data } = useQuery({
@@ -140,7 +141,14 @@ const EditBlog = () => {
 	if (isError) {
 		return <div>Error: {error?.message}</div>;
 	}
-
+if (!authenticated) {
+	return (
+		<Navigate
+			to='/signin'
+			replace={true}
+		/>
+	);
+}
 	return (
 		<div className='flex font-fractul h-screen'>
 			<Toaster />

@@ -4,13 +4,14 @@ import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { BlogPropsType } from '../types/Blogprops.type';
 import blogs from '../temp';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext';
 
 const Search = () => {
 	const location = useLocation();
 	const queryParams = new URLSearchParams(location.search);
 	const queryValue = queryParams.get('q');
-	
+	const{authenticated}=useAuth()
 	const {
 		isLoading,
 		error,
@@ -31,8 +32,17 @@ const Search = () => {
 		staleTime: 0,
 		enabled:!!queryValue
 	});
+	
 	if (isError) return <div>error</div>;
 	if (isLoading) return <div>Loading</div>;
+	if (!authenticated) {
+		return (
+			<Navigate
+				to='/signin'
+				replace={true}
+			/>
+		);
+	}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />

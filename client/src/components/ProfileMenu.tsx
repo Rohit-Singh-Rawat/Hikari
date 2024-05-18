@@ -13,8 +13,10 @@ import '../index.css';
 import { ReactNode } from 'react';
 import ProfileIcon from './icons/ProfileIcon';
 import SignOutIcon from './icons/SignOutIcon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import WriteIcon from './icons/WriteIcon';
+import { StoriesIcon } from './icons/StoriesIcon';
+import { useAuth } from '../Context/AuthContext';
 
 export default function ProfileMenu({
 	userName,
@@ -25,6 +27,8 @@ export default function ProfileMenu({
 	userEmail: string;
 	children?: ReactNode;
 }) {
+	const { logout } = useAuth();
+	const navigate = useNavigate();
 	return (
 		<MenuProvider>
 			<TooltipProvider>
@@ -42,25 +46,37 @@ export default function ProfileMenu({
 					<div className='font-medium'>@{userName}</div>
 					<div className='text-gray-600'>{userEmail}</div>
 				</div>
-				<Link to={'/new-story'}>
-					<MenuItem className='menu-item block sm:hidden'>
-						<WriteIcon/>
-						{'Write'}
-					</MenuItem>
-				</Link>
+
 				<Link to={`/@${userName}`}>
 					<MenuItem className='menu-item'>
 						<ProfileIcon />
 						{'Profile'}
 					</MenuItem>
 				</Link>
-				<MenuSeparator className='separator' />
-				<Link to={'signOut'}>
-					<MenuItem className='menu-item'>
-						<SignOutIcon />
-						{'Sign Out'}
+				<Link to={'/new-story'}>
+					<MenuItem className='menu-item block sm:hidden'>
+						<WriteIcon />
+						{'Write'}
 					</MenuItem>
 				</Link>
+				<Link to={`/me/stories`}>
+					<MenuItem className='menu-item'>
+						<StoriesIcon />
+						{'Stories'}
+					</MenuItem>
+				</Link>
+				<MenuSeparator className='separator' />
+
+				<MenuItem
+					className='menu-item'
+					onClick={() => {
+						logout();
+						navigate('/');
+					}}
+				>
+					<SignOutIcon />
+					{'Sign Out'}
+				</MenuItem>
 			</Menu>
 		</MenuProvider>
 	);

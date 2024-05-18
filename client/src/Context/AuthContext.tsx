@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useContext, useState, useEffect, FC, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export interface User {
 	id: string;
@@ -12,7 +13,6 @@ interface AuthContextValue {
 	authenticated: boolean;
 	user: User | null;
 	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-	token: string | null;
 	isLoading: boolean;
 	isError: boolean;
 	login: (token: string) => void;
@@ -26,7 +26,6 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-	const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 	const [authenticated, setAuthenticated] = useState<boolean>(false);
 	const [user, setUser] = useState<User | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -73,20 +72,19 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	}, []);
 	const login = (token: string) => {
 		localStorage.setItem('token', token);
-		setToken(token);
 	};
 
 	const logout = () => {
 		localStorage.removeItem('token');
-		setToken(null);
+		localStorage.removeItem('User');
 		setUser(null);
 		setAuthenticated(false);
+		
 	};
 
 	const contextValue: AuthContextValue = {
 		authenticated,
 		setAuthenticated,
-		token,
 		user,
 		isLoading,
 		isError,

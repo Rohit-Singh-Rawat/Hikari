@@ -13,12 +13,14 @@ import CategoryInput from '../components/CategoryInput';
 import { Category } from '@whale_in_space/hikari-common';
 import { categories } from '../constants/category';
 
+import { Navigate, useLocation } from 'react-router-dom';
 const NewStory = () => {
 	const editor = useCreateBlockNote();
 	const [content, setContent] = useState<string>('');
 	const [title, setTitle] = useState<string>('');
 	const [category, setCategory] = useState<Category>();
 	const navigate = useNavigate();
+	const { authenticated } = useAuth();
 	const [isDraftable, setIsDraftable] = useState<boolean>(false);
 	const debounceChange = debounce(() => {
 		setIsDraftable(true);
@@ -35,33 +37,35 @@ const NewStory = () => {
 			if (title.trim() === '' || content.trim() === '') {
 				throw new Error('Title and Content needed');
 			}
-			toast('Wait')
+			toast('Wait');
 			toast.loading('saving to draft...');
 
-			return axios.post('http://127.0.0.1:8787/api/v1/blog/create', {
-				title: title,
-				content: content,
-				authorId: user?.id,
-				category: category||undefined
-
-
-			},{
-    headers: {
-      Authorization:localStorage.getItem('token')
-    },
-  });
+			return axios.post(
+				'http://127.0.0.1:8787/api/v1/blog/create',
+				{
+					title: title,
+					content: content,
+					authorId: user?.id,
+					category: category || undefined,
+				},
+				{
+					headers: {
+						Authorization: localStorage.getItem('token'),
+					},
+				}
+			);
 		},
 		onSettled: () => {
 			toast.dismiss();
 		},
 		onError: (error: AxiosError<{ error: String }>) => {
 			toast.error((error.response?.data?.error as String) || error.message || 'Error');
-			setIsDraftable(false)
+			setIsDraftable(false);
 		},
 		onSuccess: (data) => {
 			toast.success('Blog Drafted');
 			setTimeout(() => {
-				navigate(`/${data.data.id}/edit`)
+				navigate(`/${data.data.id}/edit`);
 			}, 500);
 		},
 	});
@@ -72,10 +76,17 @@ const NewStory = () => {
 
 	useEffect(() => {
 		if (isDraftable) {
-			mutation.mutate()
+			mutation.mutate();
 		}
 	}, [isDraftable, navigate]);
-
+	if (!authenticated) {
+		return (
+			<Navigate
+				to='/signin'
+				replace={true}
+			/>
+		);
+	}
 	return (
 		<div className='flex font-fractul h-screen '>
 			<Toaster />

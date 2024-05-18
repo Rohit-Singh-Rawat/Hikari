@@ -9,6 +9,7 @@ import UserProfile from './pages/UserProfile';
 import Search from './pages/Search';
 import EditBlog from './pages/EditBlog';
 import { useAuth } from './Context/AuthContext';
+import Stories from './pages/Stories';
 export const Router = () => {
 	const { isLoading, authenticated } = useAuth();
 	if (isLoading) {
@@ -44,6 +45,10 @@ export const Router = () => {
 				<Route
 					path='/:id/edit'
 					element={<EditBlog />}
+				/>
+				<Route
+					path='/me/stories'
+					element={<Stories />}
 				/>
 				<Route
 					path='/:username'

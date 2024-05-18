@@ -4,7 +4,9 @@ import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { BlogPropsType } from '../types/Blogprops.type';
 
-const Home = () => {
+import { Link, Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext';
+const Home = () => {const{authenticated}=useAuth()
 	const {
 		isLoading,
 		error,
@@ -25,6 +27,14 @@ const Home = () => {
 	});
 	if(isError) return <div>error</div>
 	if (isLoading) return <div>Loading</div>
+	if (!authenticated) {
+		return (
+			<Navigate
+				to='/signin'
+				replace={true}
+			/>
+		);
+	}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
 			<NavBar />
