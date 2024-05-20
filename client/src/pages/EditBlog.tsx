@@ -7,12 +7,11 @@ import debounce from 'lodash.debounce';
 import { Toaster, toast } from 'sonner';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useAuth } from '../Context/AuthContext';
-import {  BlockNoteEditor} from '@blocknote/core';
+import { BlockNoteEditor } from '@blocknote/core';
 import { Category } from '@whale_in_space/hikari-common';
 import CategoryInput from '../components/CategoryInput';
 import { cn } from '../utils/cn';
-import {  Navigate, useLocation } from 'react-router-dom';
+import useUser from '../hooks/useUser';
 
 const EditBlog = () => {
 	const [content, setContent] = useState<string>('');
@@ -20,8 +19,7 @@ const EditBlog = () => {
 	const [isChange, setIsChange] = useState<boolean>(false);
 	const [category, setCategory] = useState<Category>();
 	const navigate = useNavigate();
-
-	const { user, isLoading: pageLoading,authenticated } = useAuth();
+	const { user } = useUser();
 	const { id } = useParams();
 
 	const { isLoading, error, isError, isSuccess, data } = useQuery({
@@ -40,13 +38,13 @@ const EditBlog = () => {
 	});
 
 	const mutation = useMutation({
-		mutationFn: () => {
+		mutationFn: async () => {
 			if (title.trim() === '' || content.trim() === '') {
 				throw new Error('Title and Content needed');
 			}
 
-			toast.loading(data.blog.published? 'Updating blog...':'Saving to draft...');
-			return axios.put(
+			toast.loading(data.blog.published ? 'Updating blog...' : 'Saving to draft...');
+			await axios.put(
 				`http://127.0.0.1:8787/api/v1/blog`,
 				{
 					id: id,
@@ -73,16 +71,16 @@ const EditBlog = () => {
 			toast.success('Saved');
 		},
 	});
+
 	const mutationPublish = useMutation({
-		mutationFn: () => {
+		mutationFn: async () => {
 			if (title.trim() === '' || content.trim() === '') {
 				throw new Error('Title and Content needed');
 			}
 			toast.loading('Publishing...');
-			return axios.post(
+			await axios.post(
 				`http://127.0.0.1:8787/api/v1/blog/publish/${id}`,
-				{
-				},
+				{},
 				{
 					headers: {
 						Authorization: localStorage.getItem('token'),
@@ -102,9 +100,12 @@ const EditBlog = () => {
 			setTimeout(() => navigate(`/blog/${id}`), 500);
 		},
 	});
+
 	const debounceSave = useCallback(
-		debounce(() => mutation.mutate(), 1000),
-		[]
+		debounce(() => {
+			mutation.mutate();
+		}, 1000),
+		[title, content, category]
 	);
 
 	const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -117,7 +118,7 @@ const EditBlog = () => {
 		const blocks = JSON.parse(data.blog.content);
 		setTitle(data.blog.title);
 		setCategory(data.blog.category);
-		setContent(data.blog.content)
+		setContent(data.blog.content);
 		return BlockNoteEditor.create({ initialContent: blocks });
 	}, [isSuccess, data]);
 
@@ -134,21 +135,14 @@ const EditBlog = () => {
 		}
 	}, [title, content, category, debounceSave, isChange]);
 
-	if (pageLoading || isLoading) {
+	if (isLoading) {
 		return <>Loading</>;
 	}
 
 	if (isError) {
 		return <div>Error: {error?.message}</div>;
 	}
-if (!authenticated) {
-	return (
-		<Navigate
-			to='/signin'
-			replace={true}
-		/>
-	);
-}
+
 	return (
 		<div className='flex font-fractul h-screen'>
 			<Toaster />
@@ -162,7 +156,7 @@ if (!authenticated) {
 						<button
 							className={cn(
 								'rounded-2xl bg-green-400 px-2 text-sm py-[2px]',
-								data.blog.publised
+								data.blog.published
 									? 'bg-slate-600'
 									: mutationPublish.isPending
 									? 'bg-green-300'
@@ -184,6 +178,7 @@ if (!authenticated) {
 						autoFocus
 						className='outline-none m-2 lg:m-0 lg:p-3 pl-2 text-2xl md:text-3xl lg:text-4xl w-[90%] border-slate-300 border-l-[1px]'
 						onChange={onChangeTitle}
+						disabled={mutationPublish.isPending}
 					/>
 					<div>
 						<CategoryInput
@@ -197,6 +192,7 @@ if (!authenticated) {
 					<Content
 						editor={editor}
 						onChange={onChangeContent}
+						editable={!mutationPublish.isPending}
 					/>
 				</div>
 			</div>

@@ -34,5 +34,5 @@ export function getContentFromObjects(objects: ContentObject[]): string {
 
 	objects.forEach((obj) => extractContent(obj));
 
-	return contentArray.join('');
+	return contentArray.join('—');
 }

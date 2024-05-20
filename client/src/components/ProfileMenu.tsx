@@ -16,7 +16,6 @@ import SignOutIcon from './icons/SignOutIcon';
 import { Link, useNavigate } from 'react-router-dom';
 import WriteIcon from './icons/WriteIcon';
 import { StoriesIcon } from './icons/StoriesIcon';
-import { useAuth } from '../Context/AuthContext';
 
 export default function ProfileMenu({
 	userName,
@@ -27,7 +26,6 @@ export default function ProfileMenu({
 	userEmail: string;
 	children?: ReactNode;
 }) {
-	const { logout } = useAuth();
 	const navigate = useNavigate();
 	return (
 		<MenuProvider>
@@ -70,7 +68,6 @@ export default function ProfileMenu({
 				<MenuItem
 					className='menu-item'
 					onClick={() => {
-						logout();
 						navigate('/');
 					}}
 				>

@@ -47,15 +47,21 @@ const redTheme = {
 	dark: darkRedTheme,
 };
 
-export default function Content({editor, onChange}:{editor:any, onChange?:()=>void}) {
-
+export default function Content({
+	editor,
+	onChange,
+	editable = true,
+}: {
+	editor: any;
+	onChange?: () => void;
+	editable?: boolean;
+}) {
 	return (
 		<BlockNoteView
 			editor={editor}
 			theme={redTheme}
 			onChange={onChange}
-			
-			
+			editable={editable}
 			className='w-full  min-h-[calc(100dvh-330px)] border-[#f1f5f9] font-fractul rounded-2xl lg:my-10 lg:border-2 lg:px-2 py-5 lg:shadow-md'
 			data-changing-font-demo
 		/>

@@ -48,9 +48,9 @@ user
 
 			const newUser = await prisma.user.create({
 				data: {
-					email: body.email,
+					email: body.email.toLowerCase(),
 					FullName: body.FullName,
-					username: body.username,
+					username: body.username.toLowerCase(),
 					salt: saltHex,
 					password: hashHex,
 				},

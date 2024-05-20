@@ -67,7 +67,7 @@ blog
 					authorId: userId,
 					readTime: calculateReadTime({ heading: body.title, content: content }),
 					reads: 0,
-					excerpt: content.slice(0, 100),
+					excerpt: content.slice(0, 400),
 					category: body.category || null,
 					published: body.published || false,
 				},
@@ -118,7 +118,6 @@ blog
 			});
 		}
 		const content = getContentFromObjects(JSON.parse(body.content));
-		console.log(content.slice(0,100))
 		try {
 			const blog = await prisma.blog.update({
 				where: { id: body.id, authorId: userId },
@@ -126,7 +125,7 @@ blog
 					title: body.title,
 					content: body.content,
 					readTime: calculateReadTime({ heading: body.title, content: content }),
-					excerpt: content.slice(0,100),
+					excerpt: content.slice(0,400),
 					category: body.category || null,
 				},
 			});

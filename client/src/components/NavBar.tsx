@@ -9,7 +9,6 @@ import { useState } from 'react';
 const NavBar = () => {
 	const [searchValue, setSearchValue] = useState<String>('');
 	
-
 	const navigate = useNavigate();
 	
 	return (
@@ -23,7 +22,7 @@ const NavBar = () => {
 					className='flex justify-center gap-3 items-end lg:border-b-[0.1px] border-y-gray-400 lg:pb-2 px-5'
 					onSubmit={(e) => {
 						e.preventDefault();
-						navigate(`/search?q=${searchValue}`);
+						searchValue ? navigate(`/search?q=${searchValue}`) : null;
 					}}
 				>
 					<input

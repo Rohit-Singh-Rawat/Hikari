@@ -11,11 +11,10 @@ import '../default.css';
 import { useParams } from 'react-router-dom';
 import { BlockNoteEditor } from '@blocknote/core';
 import { Link, Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext';
 const Blog = () => {
 	const [html, setHTML] = useState<string>('');
 	const [blog, setBlog] = useState<BlogPropsType>();
-	const { id } = useParams();const { authenticated } = useAuth();
+	const { id } = useParams();
 	const { isLoading, error, isError, isSuccess, data } = useQuery({
 		queryKey: ['blogs', id],
 		queryFn: async () => {
@@ -48,18 +47,11 @@ const Blog = () => {
 	if (isLoading) {
 		return <>loading</>;
 	}
-if (!authenticated) {
-	return (
-		<Navigate
-			to='/signin'
-			replace={true}
-		/>
-	);
-}
+
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
 			<NavBar />
-			<div className='w-full flex justify-center '>
+			<div className='w-full flex justify-center min-h-[calc(100dvh-100px)]'>
 				{' '}
 				<div className='min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl border-b-2 flex flex-col  gap-5 lg:gap-10 pt-5 lg:pt-10 '>
 					<h1 className='lg:text-[42px] tracking-wider leading-snug text-pretty  break-words text-3xl text-left font-semibold'>
@@ -90,10 +82,11 @@ if (!authenticated) {
 					<div
 						id='blogContent'
 						dangerouslySetInnerHTML={{ __html: html }}
+
 					></div>
 				</div>
 			</div>
-			<div className='border-t-2 border-t-[#bdbbbb] pt-3 w-full'></div>
+			<div className='border-t-2 border-t-[#bdbbbb] pt-3  w-full'></div>
 		</div>
 	);
 };

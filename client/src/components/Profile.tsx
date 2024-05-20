@@ -1,9 +1,9 @@
 import ProfileMenu from './ProfileMenu';
 import Avatar from './Avatar';
-import { User, useAuth } from '../Context/AuthContext';
+import useUser, { User } from '../hooks/useUser';
 
 const Profile = () => {
-	const {user}=useAuth()
+	const{user} = useUser()
 	const localUser: User =  JSON.parse(localStorage.getItem('User') as string )
   return (
 		<ProfileMenu

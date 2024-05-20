@@ -8,7 +8,6 @@ import debounce from 'lodash.debounce';
 import { Toaster, toast } from 'sonner';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { useAuth } from '../Context/AuthContext';
 import CategoryInput from '../components/CategoryInput';
 import { Category } from '@whale_in_space/hikari-common';
 import { categories } from '../constants/category';
@@ -20,13 +19,11 @@ const NewStory = () => {
 	const [title, setTitle] = useState<string>('');
 	const [category, setCategory] = useState<Category>();
 	const navigate = useNavigate();
-	const { authenticated } = useAuth();
 	const [isDraftable, setIsDraftable] = useState<boolean>(false);
 	const debounceChange = debounce(() => {
 		setIsDraftable(true);
 	}, 1000);
 	const debounceSave = useCallback(() => debounceChange(), []);
-	const { user } = useAuth();
 	const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.target.value);
 		debounceSave();
@@ -79,14 +76,7 @@ const NewStory = () => {
 			mutation.mutate();
 		}
 	}, [isDraftable, navigate]);
-	if (!authenticated) {
-		return (
-			<Navigate
-				to='/signin'
-				replace={true}
-			/>
-		);
-	}
+	
 	return (
 		<div className='flex font-fractul h-screen '>
 			<Toaster />
@@ -107,6 +97,7 @@ const NewStory = () => {
 						autoFocus
 						className='outline-none m-2 lg:m-0 lg:p-3 pl-2  text-2xl md:text-3xl lg:text-4xl w-[90%] border-slate-300 border-l-[1px]'
 						onChange={onChangeTitle}
+						disabled={mutation.isPending}
 					/>
 					<CategoryInput
 						defaultValue={category}
@@ -117,6 +108,7 @@ const NewStory = () => {
 					<Content
 						editor={editor}
 						onChange={onChangeContent}
+						editable={!mutation.isPending}
 					/>
 				</div>
 			</div>

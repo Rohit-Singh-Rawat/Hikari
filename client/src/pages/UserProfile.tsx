@@ -7,11 +7,9 @@ import blogs from '../temp';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
 import {  Navigate } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext';
 const UserProfile = () => {
 	const { username } = useParams();const location = useLocation();
 	const id = username?.replace('@', '');
-const{authenticated}=useAuth()
 	const {
 		isLoading,
 		error,
@@ -35,14 +33,7 @@ const{authenticated}=useAuth()
 	if (isLoading) return <div>Loading</div>
 	
 	console.log(user?.data.user.blogs)
-	if (!authenticated) {
-		return (
-			<Navigate
-				to='/signin'
-				replace={true}
-			/>
-		);
-	}
+	
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
@@ -76,7 +67,7 @@ const{authenticated}=useAuth()
 								<BlogBlock
 									reads={blog.reads}
 									excerpt={blog.excerpt}
-									id={blog.authorId}
+									id={blog.id}
 									title={blog.title}
 									readTime={blog.readTime}
 									publishedOn={blog.publishedOn}

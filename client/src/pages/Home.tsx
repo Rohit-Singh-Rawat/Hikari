@@ -5,8 +5,8 @@ import axios from 'axios';
 import { BlogPropsType } from '../types/Blogprops.type';
 
 import { Link, Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext';
-const Home = () => {const{authenticated}=useAuth()
+import useUser from '../hooks/useUser';
+const Home = () => {
 	const {
 		isLoading,
 		error,
@@ -18,23 +18,16 @@ const Home = () => {const{authenticated}=useAuth()
 			const token = localStorage.getItem('token');
 			const response = await axios.get('http://127.0.0.1:8787/api/v1/blog/bulk', {
 				headers: {
-					Authorization	: token,
+					Authorization: token,
 				},
 			});
 
 			return response;
 		},
 	});
-	if(isError) return <div>error</div>
-	if (isLoading) return <div>Loading</div>
-	if (!authenticated) {
-		return (
-			<Navigate
-				to='/signin'
-				replace={true}
-			/>
-		);
-	}
+	if (isError) return <div>error</div>;
+	if (isLoading) return <div>Loading</div>;
+	
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
 			<NavBar />
@@ -46,6 +39,7 @@ const Home = () => {const{authenticated}=useAuth()
 					{blogs?.data?.blogs?.map((blog: any) => {
 						return (
 							<BlogBlock
+							key={blog.id}
 								reads={blog.reads}
 								excerpt={blog.excerpt}
 								id={blog.id}

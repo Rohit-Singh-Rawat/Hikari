@@ -7,19 +7,9 @@ import { useMemo, useState } from 'react';
 import { cn } from '../utils/cn';
 
 import { Link, Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext';
 const Stories = () => {
 	const [showDraft, setShowDraft] = useState<boolean>(true);
-	const { authenticated } = useAuth();
-  console.log(authenticated)
-  if (!authenticated) {
-		return (
-			<Navigate
-				to='/signin'
-				replace={true}
-			/>
-		);
-	}
+ 
 	const {
 		isLoading,
 		isError,
@@ -84,7 +74,7 @@ const Stories = () => {
 					</div>
 					<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
 						{showDraft
-							? draft.map((blog: any) => {
+							?( draft.length> 0? draft.map((blog: any) => {
 									return (
 										<BlogBlock
 											reads={blog.reads}
@@ -97,8 +87,8 @@ const Stories = () => {
 											author={blog.author}
 										/>
 									);
-							  })
-							: published.map((blog: any) => {
+							  }):'No Draft blog')
+							: (published.length > 0 ?published.map((blog: any) => {
 									return (
 										<BlogBlock
 											reads={blog.reads}
@@ -111,7 +101,7 @@ const Stories = () => {
 											author={blog.author}
 										/>
 									);
-							  })}
+							  }):'No Published blog')}
 					</div>
 				</div>{' '}
 			</div>
