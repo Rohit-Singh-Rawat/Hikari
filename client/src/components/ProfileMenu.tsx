@@ -34,7 +34,7 @@ export default function ProfileMenu({
 					<VisuallyHidden>{userName}</VisuallyHidden>
 					{children}
 				</TooltipAnchor>
-				<Tooltip className='tooltip'>Accessibility Shortcuts</Tooltip>
+				<Tooltip className='tooltip'>{userName}</Tooltip>
 			</TooltipProvider>
 			<Menu
 				className='menu text-sm sm:text-md max-w-[170px] p-[0.1rem] sm:p-[0.4rem] min-w-[170px] sm:max-w-[280px] sm:min-w-[250px]'
