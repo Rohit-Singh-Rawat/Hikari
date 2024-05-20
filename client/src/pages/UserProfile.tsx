@@ -43,10 +43,10 @@ const UserProfile = () => {
 							{user?.data.user.FullName || <Skeleton width={300} />}
 						</h1>
 						<h2 className='lg:text-2xl text-1xl text-start font-medium '>
-							{user?.data.user.username ? '@' + user?.data.user.username : <Skeleton width={350} />}
+							{user?.data.user.username ? '@' + user?.data.user.username : <Skeleton />}
 						</h2>
 						<h3 className='lg:text-xl text-lg text-start font-normal '>
-							{user?.data.user.email || <Skeleton width={400} />}
+							{user?.data.user.email || <Skeleton  />}
 						</h3>
 					</div>
 

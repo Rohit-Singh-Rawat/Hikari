@@ -14,14 +14,15 @@ export default function BlogCardSkeleton() {
 					<Skeleton
 						width={200}
 						height={20}
+						
 					/>
 				</div>
 			</div>
 
 			<div className='flex justify-between  items-start  my-3 '>
-				<div className='pr-3 flex flex-col gap-5'>
+				<div className='pr-3 flex flex-col gap-5 w-full'>
 					<Skeleton
-						width={600}
+					containerClassName='w-full'
 						height={20}
 						count={1}
 					/>
@@ -29,6 +30,7 @@ export default function BlogCardSkeleton() {
 						width={600}
 						height={17}
 						count={3}
+						containerClassName='hidden md:block'
 					/>
 				</div>
 			</div>

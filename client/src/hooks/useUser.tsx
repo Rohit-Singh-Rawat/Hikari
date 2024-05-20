@@ -43,7 +43,7 @@ export default function useUser() {
 			retry: false,
 		});
 
-		return { user, isLoading };
+		return { user, isLoading	 };
 	} else {
 		return { user: null, isLoading: false };
 	}

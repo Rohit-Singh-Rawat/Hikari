@@ -9,7 +9,7 @@ const BlogPageLoading = () => {
 				<div className='min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl border-b-2 flex flex-col gap-2 lg:gap-5 pt-5 lg:pt-10'>
 					<Skeleton
 						height={42}
-						width={400}
+						className='w-full'
 						style={{ marginBottom: '1rem' }}
 					/>
 					<div className='flex justify-start w-full border-b-[1.5px] border-b-[#bdbbbb] pb-10 items-center gap-3 px-4 lg:gap-5'>
@@ -39,7 +39,7 @@ const BlogPageLoading = () => {
 const getRandomWidth = () => `${Math.floor(Math.random() * 31) + 70}%`;
 
 const getRandomLines = () => {
-	const lines = Math.floor(Math.random() * 3) + 4;
+	const lines = Math.floor(Math.random() * 2) + 3;
 	return new Array(lines).fill(null).map((_, idx) => (
 		<Skeleton
 			key={idx}
@@ -50,7 +50,7 @@ const getRandomLines = () => {
 };
 
 const BlogLoading = () => {
-	const paragraphs = Math.floor(Math.random() * 2) + 2;
+	const paragraphs = Math.floor(Math.random() * 2) + 3;
 
 	return (
 		<div className='flex flex-col gap-4'>
