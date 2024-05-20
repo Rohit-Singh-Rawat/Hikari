@@ -6,34 +6,33 @@ import { BlogPropsType } from '../types/Blogprops.type';
 import blogs from '../temp';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
-import {  Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 const UserProfile = () => {
-	const { username } = useParams();const location = useLocation();
+	const { username } = useParams();
+	const location = useLocation();
 	const id = username?.replace('@', '');
 	const {
 		isLoading,
 		error,
 		isError,
-		data:user,
+		data: user,
 	} = useQuery({
 		queryKey: ['profile', id],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
 			const response = await axios.get(`http://127.0.0.1:8787/api/v1/user/profile/${id}`, {
 				headers: {
-					Authorization	: token,
+					Authorization: token,
 				},
 			});
 
 			return response;
 		},
-		enabled:!!username
+		enabled: !!username,
 	});
-	if(isError) return <div>error</div>
-	if (isLoading) return <div>Loading</div>
-	
-	console.log(user?.data.user.blogs)
-	
+
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
@@ -41,13 +40,13 @@ const UserProfile = () => {
 				<div className='min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl border-b-2 flex flex-col  gap-5 lg:gap-10 pt-5 lg:pt-10 '>
 					<div className='lg:px-10 flex flex-col gap-3'>
 						<h1 className='lg:text-5xl text-3xl text-start font-semibold '>
-							{user?.data.user.FullName}
+							{user?.data.user.FullName || <Skeleton width={300} />}
 						</h1>
 						<h2 className='lg:text-2xl text-1xl text-start font-medium '>
-							@{user?.data.user.username}
+							{user?.data.user.username ? '@' + user?.data.user.username : <Skeleton width={350} />}
 						</h2>
 						<h3 className='lg:text-xl text-lg text-start font-normal '>
-							{user?.data.user.email}
+							{user?.data.user.email || <Skeleton width={400} />}
 						</h3>
 					</div>
 
@@ -62,20 +61,24 @@ const UserProfile = () => {
 						</div>
 					</div>
 					<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
-						{user?.data.user.blogs.map((blog: any) => {
-							return (
-								<BlogBlock
-									reads={blog.reads}
-									excerpt={blog.excerpt}
-									id={blog.id}
-									title={blog.title}
-									readTime={blog.readTime}
-									publishedOn={blog.publishedOn}
-									category={blog.category}
-									author={user.data.user}
-								/>
-							);
-						})}
+						{isLoading
+							? Array(8)
+									.fill(0)
+									.map((ske, i) => <BlogCardSkeleton key={i} />)
+							: user?.data.user.blogs.map((blog: any) => {
+									return (
+										<BlogBlock
+											reads={blog.reads}
+											excerpt={blog.excerpt}
+											id={blog.id}
+											title={blog.title}
+											readTime={blog.readTime}
+											publishedOn={blog.publishedOn}
+											category={blog.category}
+											author={user.data.user}
+										/>
+									);
+							  })}
 					</div>
 				</div>{' '}
 			</div>

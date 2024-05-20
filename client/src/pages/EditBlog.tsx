@@ -12,6 +12,8 @@ import { Category } from '@whale_in_space/hikari-common';
 import CategoryInput from '../components/CategoryInput';
 import { cn } from '../utils/cn';
 import useUser from '../hooks/useUser';
+import Skeleton from 'react-loading-skeleton';
+import EditPageLoading from '../components/Loading/EditPageLoading';
 
 const EditBlog = () => {
 	const [content, setContent] = useState<string>('');
@@ -105,7 +107,7 @@ const EditBlog = () => {
 		debounce(() => {
 			mutation.mutate();
 		}, 1000),
-		[title, content, category]
+		[]
 	);
 
 	const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -135,14 +137,6 @@ const EditBlog = () => {
 		}
 	}, [title, content, category, debounceSave, isChange]);
 
-	if (isLoading) {
-		return <>Loading</>;
-	}
-
-	if (isError) {
-		return <div>Error: {error?.message}</div>;
-	}
-
 	return (
 		<div className='flex font-fractul h-screen'>
 			<Toaster />
@@ -153,47 +147,66 @@ const EditBlog = () => {
 					</Link>
 
 					<div className='flex items-center gap-10'>
-						<button
-							className={cn(
-								'rounded-2xl bg-green-400 px-2 text-sm py-[2px]',
-								data.blog.published
-									? 'bg-slate-600'
-									: mutationPublish.isPending
-									? 'bg-green-300'
-									: ''
-							)}
-							onClick={() => mutationPublish.mutate()}
-							disabled={data.blog.published || mutationPublish.isPending || mutation.isPending}
-						>
-							Publish
-						</button>
+						{isLoading ? (
+							<Skeleton
+								width={80}
+								height={30}
+							/>
+						) : (
+							<button
+								className={cn(
+									'rounded-2xl bg-green-400 px-2 text-sm py-[2px]',
+									data.blog.published
+										? 'bg-zinc-400'
+										: mutationPublish.isPending
+										? 'bg-green-300'
+										: ''
+								)}
+								onClick={() => mutationPublish.mutate()}
+								disabled={
+									isLoading ||
+									data.blog.published ||
+									mutationPublish.isPending ||
+									mutation.isPending
+								}
+							>
+								{data.blog.published ? `Published` : `Publish`}
+							</button>
+						)}
+
 						<Profile />
 					</div>
 				</div>
 				<div className='flex flex-col items-start min-w-full max-w-full md:max-w-2xl md:min-w-[672px] lg:max-w-3xl lg:min-w-[768px]'>
-					<input
-						type='text'
-						value={title}
-						placeholder='Title'
-						autoFocus
-						className='outline-none m-2 lg:m-0 lg:p-3 pl-2 text-2xl md:text-3xl lg:text-4xl w-[90%] border-slate-300 border-l-[1px]'
-						onChange={onChangeTitle}
-						disabled={mutationPublish.isPending}
-					/>
-					<div>
-						<CategoryInput
-							defaultValue={category}
-							onClick={(cat: Category) => {
-								setCategory(cat);
-								setIsChange(true);
-							}}
-						/>
-					</div>
-					<Content
-						editor={editor}
-						onChange={onChangeContent}
-						editable={!mutationPublish.isPending}
-					/>
+					{isLoading ? (
+						<EditPageLoading />
+					) : (
+						<>
+							<input
+								type='text'
+								value={title}
+								placeholder='Title'
+								autoFocus
+								className='outline-none m-2 lg:m-0 lg:p-3 pl-2 text-2xl md:text-3xl lg:text-4xl w-[90%] border-slate-300 border-l-[1px]'
+								onChange={onChangeTitle}
+								disabled={mutationPublish.isPending}
+							/>
+							<div>
+								<CategoryInput
+									defaultValue={category}
+									onClick={(cat: Category) => {
+										setCategory(cat);
+										setIsChange(true);
+									}}
+								/>
+							</div>
+							<Content
+								editor={editor}
+								onChange={onChangeContent}
+								editable={!mutationPublish.isPending}
+							/>
+						</>
+					)}
 				</div>
 			</div>
 		</div>

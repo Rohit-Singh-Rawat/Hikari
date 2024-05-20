@@ -6,6 +6,7 @@ import { BlogPropsType } from '../types/Blogprops.type';
 
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import useUser from '../hooks/useUser';
+import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 const Home = () => {
 	const {
 		isLoading,
@@ -26,8 +27,7 @@ const Home = () => {
 		},
 	});
 	if (isError) return <div>error</div>;
-	if (isLoading) return <div>Loading</div>;
-	
+
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
 			<NavBar />
@@ -36,21 +36,25 @@ const Home = () => {
 					Blogs
 				</h1>
 				<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
-					{blogs?.data?.blogs?.map((blog: any) => {
-						return (
-							<BlogBlock
-							key={blog.id}
-								reads={blog.reads}
-								excerpt={blog.excerpt}
-								id={blog.id}
-								readTime={blog.readTime}
-								title={blog.title}
-								publishedOn={blog.publishedOn}
-								category={blog.category}
-								author={blog.author}
-							/>
-						);
-					})}
+					{isLoading
+						? Array(8)
+								.fill(0)
+								.map((ske, i) => <BlogCardSkeleton key={i} />)
+						: blogs?.data?.blogs?.map((blog: any) => {
+								return (
+									<BlogBlock
+										key={blog.id}
+										reads={blog.reads}
+										excerpt={blog.excerpt}
+										id={blog.id}
+										readTime={blog.readTime}
+										title={blog.title}
+										publishedOn={blog.publishedOn}
+										category={blog.category}
+										author={blog.author}
+									/>
+								);
+						  })}
 				</div>
 			</div>
 		</div>

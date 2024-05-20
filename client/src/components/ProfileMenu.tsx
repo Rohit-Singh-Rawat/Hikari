@@ -68,7 +68,8 @@ export default function ProfileMenu({
 				<MenuItem
 					className='menu-item'
 					onClick={() => {
-						navigate('/');
+						localStorage.clear();
+						navigate('/Signin');
 					}}
 				>
 					<SignOutIcon />

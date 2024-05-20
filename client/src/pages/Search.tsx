@@ -5,6 +5,7 @@ import axios from 'axios';
 import { BlogPropsType } from '../types/Blogprops.type';
 import blogs from '../temp';
 import { Link, Navigate, useLocation } from 'react-router-dom';
+import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 
 const Search = () => {
 	const location = useLocation();
@@ -31,8 +32,6 @@ const Search = () => {
 		enabled:!!queryValue
 	});
 	
-	if (isError) return <div>error</div>;
-	if (isLoading) return <div>Loading</div>;
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
@@ -45,20 +44,28 @@ const Search = () => {
 						<div className='border-b-2 border-b-[#bdbbbb] pb-3 mx-10 '></div>
 					</div>
 					<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
-						{searchedBlogs?.data?.blogs?.map((blog: any) => {
-							return (
-								<BlogBlock
-									reads={blog.reads}
-									excerpt={blog.excerpt}
-									id={blog.id}
-									readTime={blog.readTime}
-									title={blog.title}
-									publishedOn={blog.publishedOn}
-									category={blog.category}
-									author={blog.author}
-								/>
-							);
-						})}
+						{isLoading ? (
+							Array(4)
+								.fill(0)
+								.map((ske, i) => <BlogCardSkeleton key={i} />)
+						) : searchedBlogs?.data?.blogs?.length > 0 ? (
+							searchedBlogs?.data?.blogs?.map((blog: any) => {
+								return (
+									<BlogBlock
+										reads={blog.reads}
+										excerpt={blog.excerpt}
+										id={blog.id}
+										readTime={blog.readTime}
+										title={blog.title}
+										publishedOn={blog.publishedOn}
+										category={blog.category}
+										author={blog.author}
+									/>
+								);
+							})
+						) : (
+							<h2 className='text-2xl'>No results match that query</h2>
+						)}
 					</div>
 				</div>{' '}
 			</div>

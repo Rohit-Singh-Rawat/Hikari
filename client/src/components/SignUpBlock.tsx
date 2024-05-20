@@ -1,7 +1,7 @@
 import LabelledButton from './LabelledButton';
 import { Link, useNavigate } from 'react-router-dom';
 import HikariIcon from './icons/HikariIcon';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
@@ -15,6 +15,8 @@ const SignUpBlock = () => {
 		password: '',
 	});
 	const navigate = useNavigate();
+	
+	const queryClient = useQueryClient();
 	const mutation = useMutation({
 		mutationFn: (event: React.FocusEvent<HTMLFormElement>) => {
 			event.preventDefault();
@@ -40,6 +42,7 @@ const SignUpBlock = () => {
 			localStorage.setItem('token', data.data.jwt);
 
 			toast.success('Signed In successfully');
+			queryClient.invalidateQueries({ queryKey: ['authUser'] });
 			setTimeout(() => {
 				navigate('/');
 			}, 500);

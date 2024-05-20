@@ -30,7 +30,7 @@ const BlogBlock = ({
 						className='size-7 md:size-8 '
 					/>
 
-					<div>{author.FullName}</div>
+					<div className='hover:shadow-sm p-1 rounded-lg'>{author.FullName}</div>
 				</Link>
 				<span className='-translate-y-1'>.</span>
 				<div>

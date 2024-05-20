@@ -7,9 +7,11 @@ import { useMemo, useState } from 'react';
 import { cn } from '../utils/cn';
 
 import { Link, Navigate, useLocation } from 'react-router-dom';
+import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
+import EditIcon from '../components/icons/EditIcon';
 const Stories = () => {
 	const [showDraft, setShowDraft] = useState<boolean>(true);
- 
+
 	const {
 		isLoading,
 		isError,
@@ -39,9 +41,7 @@ const Stories = () => {
 				(story: BlogPropsType & { published: boolean }) => story.published === true
 			);
 	}, [stories]);
-	if (isError) return <div>error</div>;
-	if (isLoading) return <div>Loading</div>;
-	
+
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
@@ -73,35 +73,61 @@ const Stories = () => {
 						</div>
 					</div>
 					<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
-						{showDraft
-							?( draft.length> 0? draft.map((blog: any) => {
+						{isLoading
+							? Array(4)
+									.fill(0)
+									.map((ske, i) => <BlogCardSkeleton key={i} />)
+							: showDraft
+							? draft.length > 0
+								? draft.map((blog: any) => {
+										return (
+											<div className='flex flex-col  items-end '>
+												<Link to={`/${blog.id}/edit`}>
+													<div className=' flex gap-2 justify-center items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
+														<EditIcon />
+													</div>
+												</Link>
+												<BlogBlock
+													reads={blog.reads}
+													excerpt={blog.excerpt}
+													id={blog.id}
+													title={blog.title}
+													readTime={blog.readTime}
+													publishedOn={blog.publishedOn}
+													category={blog.category}
+													author={blog.author}
+												/>
+											</div>
+										);
+								  })
+								: 'No Draft blog'
+							: isLoading
+							? Array(4)
+									.fill(0)
+									.map((ske, i) => <BlogCardSkeleton key={i} />)
+							: published.length > 0
+							? published.map((blog: any) => {
 									return (
-										<BlogBlock
-											reads={blog.reads}
-											excerpt={blog.excerpt}
-											id={blog.authorId}
-											title={blog.title}
-											readTime={blog.readTime}
-											publishedOn={blog.publishedOn}
-											category={blog.category}
-											author={blog.author}
-										/>
+										<div className='flex flex-col  items-end '>
+											<Link to={`/${blog.id}/edit`}>
+												<div className=' flex gap-2 justify-center items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
+													<EditIcon />
+												</div>
+											</Link>
+											<BlogBlock
+												reads={blog.reads}
+												excerpt={blog.excerpt}
+												id={blog.id}
+												title={blog.title}
+												readTime={blog.readTime}
+												publishedOn={blog.publishedOn}
+												category={blog.category}
+												author={blog.author}
+											/>
+										</div>
 									);
-							  }):'No Draft blog')
-							: (published.length > 0 ?published.map((blog: any) => {
-									return (
-										<BlogBlock
-											reads={blog.reads}
-											excerpt={blog.excerpt}
-											id={blog.authorId}
-											title={blog.title}
-											readTime={blog.readTime}
-											publishedOn={blog.publishedOn}
-											category={blog.category}
-											author={blog.author}
-										/>
-									);
-							  }):'No Published blog')}
+							  })
+							: 'No Published blog'}
 					</div>
 				</div>{' '}
 			</div>

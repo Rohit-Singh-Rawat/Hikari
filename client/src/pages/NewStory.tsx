@@ -13,6 +13,7 @@ import { Category } from '@whale_in_space/hikari-common';
 import { categories } from '../constants/category';
 
 import { Navigate, useLocation } from 'react-router-dom';
+import useUser from '../hooks/useUser';
 const NewStory = () => {
 	const editor = useCreateBlockNote();
 	const [content, setContent] = useState<string>('');
@@ -28,7 +29,7 @@ const NewStory = () => {
 		setTitle(e.target.value);
 		debounceSave();
 	};
-
+	const { user } = useUser();
 	const mutation = useMutation({
 		mutationFn: () => {
 			if (title.trim() === '' || content.trim() === '') {
@@ -42,7 +43,7 @@ const NewStory = () => {
 				{
 					title: title,
 					content: content,
-					authorId: user?.id,
+					authorId: user?.id || localStorage.getItem('User'),
 					category: category || undefined,
 				},
 				{
@@ -76,7 +77,7 @@ const NewStory = () => {
 			mutation.mutate();
 		}
 	}, [isDraftable, navigate]);
-	
+
 	return (
 		<div className='flex font-fractul h-screen '>
 			<Toaster />
