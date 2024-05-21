@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 import EditIcon from '../components/icons/EditIcon';
 import OopsPage from '../components/ErrorPage';
+import DraftBlogBlock from '../components/DraftBlogBlock';
 const Stories = () => {
 	const [showDraft, setShowDraft] = useState<boolean>(true);
 
@@ -93,7 +94,8 @@ const Stories = () => {
 														<EditIcon />
 													</div>
 												</Link>
-												<BlogBlock
+												<DraftBlogBlock
+
 													reads={blog.reads}
 													excerpt={blog.excerpt}
 													id={blog.id}

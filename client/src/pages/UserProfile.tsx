@@ -65,7 +65,7 @@ const UserProfile = () => {
 							? Array(8)
 									.fill(0)
 									.map((_, i) => <BlogCardSkeleton key={i} />)
-							: user?.data.user.blogs.map((blog: any) => {
+							: user?.data.user.blogs.length>0? user?.data.user.blogs.map((blog: any) => {
 									return (
 										<BlogBlock
 											reads={blog.reads}
@@ -78,7 +78,7 @@ const UserProfile = () => {
 											author={user.data.user}
 										/>
 									);
-							  })}
+							  }):'No Published Blogs'}
 					</div>
 				</div>{' '}
 			</div>
