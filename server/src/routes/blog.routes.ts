@@ -20,8 +20,8 @@ const blog = new Hono<{
 
 blog.use('/*', async (c, next) => {
 	const jwtToken = c.req.header('Authorization')?.replace('Bearer ', '');
-	
-		console.log('object');
+
+	console.log('object');
 	if (!jwtToken) {
 		c.status(401);
 		return c.json({ error: 'unauthorized' });
@@ -125,11 +125,11 @@ blog
 					title: body.title,
 					content: body.content,
 					readTime: calculateReadTime({ heading: body.title, content: content }),
-					excerpt: content.slice(0,400),
+					excerpt: content.slice(0, 400),
 					category: body.category || null,
 				},
 			});
-			console.log(blog.excerpt)
+			console.log(blog.excerpt);
 			return c.json({
 				id: blog.id,
 			});
@@ -145,7 +145,7 @@ blog
 			datasourceUrl: c.env.DATABASE_URL,
 		}).$extends(withAccelerate());
 		try {
-			const blogs = await prisma.blog.findMany({
+		  const blogs = await prisma.blog.findMany({
 				where: { published: true },
 				select: {
 					author: {
@@ -163,6 +163,7 @@ blog
 					title: true,
 					readTime: true,
 				},
+				orderBy: [{ reads: 'desc' }, { publishedOn: 'desc' }, { readTime: 'asc' }],
 			});
 			return c.json({
 				blogs: blogs,
@@ -207,49 +208,49 @@ blog
 		const prisma = new PrismaClient({
 			datasourceUrl: c.env.DATABASE_URL,
 		}).$extends(withAccelerate());
-		console.log(searchQuery)
-		if(!query)return
+		console.log(searchQuery);
+		if (!query) return;
 		try {
-			 const blogs = await prisma.blog.findMany({
-					where: {
-						published: true,
-						OR: [
-							{
-								title: {
-									search: searchQuery,
-								},
-							},
-							{
-								content: {
-									search: searchQuery,
-								},
-							},
-						],
-					},
-					orderBy: {
-						_relevance: {
-							fields: ['title', 'content'],
-							search: searchQuery,
-							sort: 'asc',
-						},
-					},
-					select: {
-						author: {
-							select: {
-								id: true,
-								username: true,
-								FullName: true,
+			const blogs = await prisma.blog.findMany({
+				where: {
+					published: true,
+					OR: [
+						{
+							title: {
+								search: searchQuery,
 							},
 						},
-						excerpt: true,
-						content: true,
-						publishedOn: true,
-						id: true,
-						reads: true,
-						title: true,
-						readTime: true,
+						{
+							content: {
+								search: searchQuery,
+							},
+						},
+					],
+				},
+				orderBy: {
+					_relevance: {
+						fields: ['title', 'content'],
+						search: searchQuery,
+						sort: 'asc',
 					},
-				});
+				},
+				select: {
+					author: {
+						select: {
+							id: true,
+							username: true,
+							FullName: true,
+						},
+					},
+					excerpt: true,
+					content: true,
+					publishedOn: true,
+					id: true,
+					reads: true,
+					title: true,
+					readTime: true,
+				},
+			});
 			return c.json({
 				blogs: blogs,
 			});
