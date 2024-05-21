@@ -1,5 +1,4 @@
 import '@blocknote/core/fonts/inter.css';
-import { useCreateBlockNote } from '@blocknote/react';
 import '@blocknote/mantine/style.css';
 
 import { BlockNoteView, lightDefaultTheme, Theme } from '@blocknote/mantine';

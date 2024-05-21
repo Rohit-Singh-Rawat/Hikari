@@ -45,7 +45,7 @@ export default function ProfileMenu({
 					<div className='text-gray-600'>{userEmail}</div>
 				</div>
 
-				<Link to={`/@${userName}`}>
+				<Link to={`/user/@${userName}`}>
 					<MenuItem className='menu-item'>
 						<ProfileIcon />
 						{'Profile'}

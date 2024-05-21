@@ -45,7 +45,7 @@ const Stories = () => {
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
-			<div className='w-full flex justify-center '>
+			<div className='w-full flex flex-col items-center justify-center '>
 				<div className='min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl border-b-2 flex flex-col  gap-5 lg:gap-10 pt-5 lg:pt-10 '>
 					<h1 className='lg:text-5xl text-3xl text-start font-semibold lg:underline-offset-8 lg:px-10'>
 						Your Stories
@@ -72,7 +72,7 @@ const Stories = () => {
 							</button>
 						</div>
 					</div>
-					<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
+					<div className='flex justify-center flex-col w-full items-center gap-5 lg:gap-10'>
 						{isLoading
 							? Array(4)
 									.fill(0)
@@ -81,9 +81,9 @@ const Stories = () => {
 							? draft.length > 0
 								? draft.map((blog: any) => {
 										return (
-											<div className='flex flex-col  items-end '>
-												<Link to={`/${blog.id}/edit`}>
-													<div className=' flex gap-2 justify-center items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
+											<div className='flex flex-col  w-full items-center flex-grow'>
+												<Link to={`/${blog.id}/edit`} className='w-full pr-6 flex justify-end '>
+													<div className=' flex gap-2 justify-center size-7 items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
 														<EditIcon />
 													</div>
 												</Link>
@@ -108,9 +108,12 @@ const Stories = () => {
 							: published.length > 0
 							? published.map((blog: any) => {
 									return (
-										<div className='flex flex-col  items-end '>
-											<Link to={`/${blog.id}/edit`}>
-												<div className=' flex gap-2 justify-center items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
+										<div className='flex flex-col  w-full items-center flex-grow'>
+											<Link
+												to={`/${blog.id}/edit`}
+												className='w-full pr-6 flex justify-end '
+											>
+												<div className=' flex gap-2 justify-center size-7 items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
 													<EditIcon />
 												</div>
 											</Link>

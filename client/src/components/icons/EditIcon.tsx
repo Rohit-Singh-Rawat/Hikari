@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { cn } from '../../utils/cn';
 
 export default function EditIcon({ className }: { className?: string }) {

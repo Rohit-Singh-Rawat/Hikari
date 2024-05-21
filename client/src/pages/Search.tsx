@@ -2,10 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
-import { BlogPropsType } from '../types/Blogprops.type';
-import blogs from '../temp';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
+import OopsPage from '../components/ErrorPage';
 
 const Search = () => {
 	const location = useLocation();
@@ -13,7 +12,6 @@ const Search = () => {
 	const queryValue = queryParams.get('q');
 	const {
 		isLoading,
-		error,
 		isError,
 		data: searchedBlogs,
 	} = useQuery({
@@ -31,7 +29,9 @@ const Search = () => {
 		staleTime: 0,
 		enabled:!!queryValue
 	});
-	
+	if (isError) {
+		return <OopsPage />;
+	}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />

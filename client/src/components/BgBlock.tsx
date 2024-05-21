@@ -1,4 +1,3 @@
-import React from 'react';
 import pg from '../assets/Imgs/bg2.jpg';
 const BgBlock = () => {
 	return (

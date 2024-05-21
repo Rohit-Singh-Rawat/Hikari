@@ -1,10 +1,8 @@
-import { useMemo } from 'react';
 import Avatar from './Avatar';
 import TimeIcon from './icons/TimeIcon';
 import ReadIcon from './icons/ReadIcon';
 import { Link } from 'react-router-dom';
 import { BlogPropsType } from '../types/Blogprops.type';
-import { calculateReadTime } from '../../../server/src/utils/ReadTimeCalculate';
 import { categories } from '../constants/category';
 import { cn } from '../utils/cn';
 
@@ -22,7 +20,7 @@ const BlogBlock = ({
 		<div className=' min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl border-b-2 flex flex-col  border-b-stone-300 pb-5 lg:px-10 '>
 			<div className='flex items-center justify-start gap-3 '>
 				<Link
-					to={`/@${author.username}`}
+					to={`/user/@${author.username}`}
 					className='flex items-center gap-3 '
 				>
 					<Avatar
@@ -62,7 +60,9 @@ const BlogBlock = ({
 					>
 						{categories[category].icon} {categories[category].name}
 					</div>
-				) : null}
+				) : (
+					null
+				)}
 
 				<div className='flex justify-center items-center gap-2'>
 					<ReadIcon className='size-5' />

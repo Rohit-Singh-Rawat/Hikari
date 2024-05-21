@@ -10,9 +10,6 @@ import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import CategoryInput from '../components/CategoryInput';
 import { Category } from '@whale_in_space/hikari-common';
-import { categories } from '../constants/category';
-
-import { Navigate, useLocation } from 'react-router-dom';
 import useUser from '../hooks/useUser';
 const NewStory = () => {
 	const editor = useCreateBlockNote();

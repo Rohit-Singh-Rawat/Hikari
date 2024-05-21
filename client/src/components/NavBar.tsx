@@ -6,7 +6,6 @@ import WriteIcon from './icons/WriteIcon';
 import Profile from './Profile';
 import { useState } from 'react';
 import SearchDialog from './SearchDialog';
-import CloseIcon from './icons/CloseIcon';
 
 const NavBar = () => {
 	const [searchValue, setSearchValue] = useState<string>('');

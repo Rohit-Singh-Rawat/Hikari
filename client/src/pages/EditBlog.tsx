@@ -14,6 +14,7 @@ import { cn } from '../utils/cn';
 import useUser from '../hooks/useUser';
 import Skeleton from 'react-loading-skeleton';
 import EditPageLoading from '../components/Loading/EditPageLoading';
+import OopsPage from '../components/ErrorPage';
 
 const EditBlog = () => {
 	const [content, setContent] = useState<string>('');
@@ -24,7 +25,7 @@ const EditBlog = () => {
 	const { user } = useUser();
 	const { id } = useParams();
 
-	const { isLoading, error, isError, isSuccess, data } = useQuery({
+	const { isLoading, isError, isSuccess, data } = useQuery({
 		queryKey: ['editBlog', id],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
@@ -136,7 +137,9 @@ const EditBlog = () => {
 			debounceSave();
 		}
 	}, [title, content, category, debounceSave, isChange]);
-
+if (isError) {
+	return <OopsPage />;
+}
 	return (
 		<div className='flex font-fractul h-screen'>
 			<Toaster />

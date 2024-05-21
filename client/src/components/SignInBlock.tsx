@@ -3,7 +3,7 @@ import HikariIcon from './icons/HikariIcon';
 import { Link, useNavigate } from 'react-router-dom';
 import LabelledButton from './LabelledButton';
 import { SigninType } from '@whale_in_space/hikari-common';
-import { Toaster, toast } from 'sonner';
+import {  toast } from 'sonner';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 

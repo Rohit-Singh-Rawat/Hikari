@@ -11,15 +11,16 @@ import EditBlog from './pages/EditBlog';
 import Stories from './pages/Stories';
 import useUser from './hooks/useUser';
 import Loading from './components/Loading/Loading';
-
+import OopsPage from './components/ErrorPage';
+import NotFoundPage from './pages/PageNotFound';
 
 interface ProtectedRouteProps {
 	element: ReactElement;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-	const { isLoading, user } = useUser();
-
+	const { isLoading, user, isError } = useUser();
+	if (isError) return <OopsPage />;
 	if (isLoading) {
 		return <Loading />;
 	}
@@ -52,10 +53,6 @@ export const Router: React.FC = () => {
 					element={<ProtectedRoute element={<Stories />} />}
 				/>
 				<Route
-					path='/:username'
-					element={<ProtectedRoute element={<UserProfile />} />}
-				/>
-				<Route
 					path='/signup'
 					element={<Signup />}
 				/>
@@ -63,7 +60,18 @@ export const Router: React.FC = () => {
 					path='/signin'
 					element={<Signin />}
 				/>
-				 <Route path="/:id/edit" element={<ProtectedRoute element={<EditBlog />} />} /> 
+				<Route
+					path='/:id/edit'
+					element={<ProtectedRoute element={<EditBlog />} />}
+				/>
+				<Route
+					path='user/:username'
+					element={<ProtectedRoute element={<UserProfile />} />}
+				/>
+				<Route
+					path='*'
+					element={<NotFoundPage />}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);

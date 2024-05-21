@@ -1,23 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { BlogPropsType } from '../types/Blogprops.type';
-import blogs from '../temp';
 import Avatar from '../components/Avatar';
-import { useCreateBlockNote } from '@blocknote/react';
 import { useEffect, useMemo, useState } from 'react';
 import '../default.css';
 import { useParams } from 'react-router-dom';
 import { BlockNoteEditor } from '@blocknote/core';
-import { Link, Navigate, useLocation } from 'react-router-dom';
 import BlogPageLoading from '../components/Loading/BlogPageLoading';
+import OopsPage from '../components/ErrorPage';
 
 const Blog = () => {
 	const [html, setHTML] = useState<string>('');
 	const [blog, setBlog] = useState<BlogPropsType>();
 	const { id } = useParams();
-	const { isLoading, error, isError, isSuccess, data } = useQuery({
+	const { isLoading, isError, isSuccess, data } = useQuery({
 		queryKey: ['blogs', id],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
@@ -43,7 +40,9 @@ const Blog = () => {
 			if (editor) setHTML(await editor.blocksToHTMLLossy(editor.document));
 		})();
 	}, [editor]);
-
+	if (isError) {
+		return <OopsPage />;
+	}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
 			<NavBar />

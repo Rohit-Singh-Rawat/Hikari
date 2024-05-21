@@ -2,20 +2,18 @@ import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
-import { BlogPropsType } from '../types/Blogprops.type';
-import blogs from '../temp';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 
-import { Navigate } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
+import OopsPage from '../components/ErrorPage';
+import NotFoundPage from './PageNotFound';
 const UserProfile = () => {
 	const { username } = useParams();
 	const location = useLocation();
 	const id = username?.replace('@', '');
 	const {
 		isLoading,
-		error,
 		isError,
 		data: user,
 	} = useQuery({
@@ -31,8 +29,11 @@ const UserProfile = () => {
 			return response;
 		},
 		enabled: !!username,
+		retry:0
 	});
-
+if (isError) {
+	return <NotFoundPage />;
+}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
@@ -60,7 +61,7 @@ const UserProfile = () => {
 							</Link>
 						</div>
 					</div>
-					<div className='flex justify-center flex-col w-full items-center gap-5 px-4 lg:gap-10'>
+					<div className='flex justify-center flex-col w-full items-center gap-5  lg:gap-10'>
 						{isLoading
 							? Array(8)
 									.fill(0)

@@ -1,4 +1,3 @@
-import React from 'react'
 import SignUpBlock from '../components/SignUpBlock'
 import BgBlock from '../components/BgBlock'
 import { Toaster } from 'sonner';

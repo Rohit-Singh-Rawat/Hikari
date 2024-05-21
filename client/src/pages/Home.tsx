@@ -2,15 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
-import { BlogPropsType } from '../types/Blogprops.type';
 
-import { Link, Navigate, useLocation } from 'react-router-dom';
-import useUser from '../hooks/useUser';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
+import OopsPage from '../components/ErrorPage';
 const Home = () => {
 	const {
 		isLoading,
-		error,
 		isError,
 		data: blogs,
 	} = useQuery({
@@ -25,8 +22,9 @@ const Home = () => {
 
 			return response;
 		},
-	});
-	if (isError) return <div>error</div>;
+	});if (isError) {
+		return <OopsPage />;
+	}
 
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul'>
@@ -39,7 +37,7 @@ const Home = () => {
 					{isLoading
 						? Array(8)
 								.fill(0)
-								.map((ske, i) => <BlogCardSkeleton key={i} />)
+								.map((a, i) => <BlogCardSkeleton key={i} />)
 						: blogs?.data?.blogs?.map((blog: any) => {
 								return (
 									<BlogBlock

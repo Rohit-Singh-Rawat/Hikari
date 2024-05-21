@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +14,7 @@ export default function useUser() {
 	const token = localStorage.getItem('token');
 
 	if (token) {
-		const { data: user, isLoading } = useQuery({
+		const { data: user, isLoading, isError } = useQuery({
 			queryKey: ['authUser'],
 			queryFn: async () => {
 				try {
@@ -43,7 +42,7 @@ export default function useUser() {
 			retry: false,
 		});
 
-		return { user, isLoading	 };
+		return { user, isLoading, isError	 };
 	} else {
 		return { user: null, isLoading: false };
 	}
