@@ -135,7 +135,7 @@ const Stories = () => {
 												<DeleteButton blogId={blog.id} />
 											</div>
 
-											<DraftBlogBlock
+											<BlogBlock
 												reads={blog.reads}
 												excerpt={blog.excerpt}
 												id={blog.id}

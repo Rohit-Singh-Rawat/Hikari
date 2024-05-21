@@ -1,4 +1,3 @@
-import React from 'react'
 import { cn } from '../../utils/cn';
 
 export default function WarningIcon({ className }: { className?: string }) {
