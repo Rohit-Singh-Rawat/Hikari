@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
+import axios from '../axios/axios';
 
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 import OopsPage from '../components/ErrorPage';
@@ -22,7 +22,8 @@ const Home = () => {
 
 			return response;
 		},
-	});if (isError) {
+	});
+	if (isError) {
 		return <OopsPage />;
 	}
 

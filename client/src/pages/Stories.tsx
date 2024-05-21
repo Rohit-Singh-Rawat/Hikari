@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
+import axios from '../axios/axios';
 import { BlogPropsType } from '../types/Blogprops.type';
 import { useMemo, useState } from 'react';
 import { cn } from '../utils/cn';
@@ -82,7 +82,10 @@ const Stories = () => {
 								? draft.map((blog: any) => {
 										return (
 											<div className='flex flex-col  w-full items-center flex-grow'>
-												<Link to={`/${blog.id}/edit`} className='w-full pr-6 flex justify-end '>
+												<Link
+													to={`/${blog.id}/edit`}
+													className='w-full pr-6 flex justify-end '
+												>
 													<div className=' flex gap-2 justify-center size-7 items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
 														<EditIcon />
 													</div>

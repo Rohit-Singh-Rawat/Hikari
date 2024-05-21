@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
-import {  useLocation } from 'react-router-dom';
+import axios from '../axios/axios';
+import { useLocation } from 'react-router-dom';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 import OopsPage from '../components/ErrorPage';
 
@@ -27,7 +27,7 @@ const Search = () => {
 			return response;
 		},
 		staleTime: 0,
-		enabled:!!queryValue
+		enabled: !!queryValue,
 	});
 	if (isError) {
 		return <OopsPage />;

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
+import axios from '../axios/axios';
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 
 import Skeleton from 'react-loading-skeleton';
@@ -29,11 +29,11 @@ const UserProfile = () => {
 			return response;
 		},
 		enabled: !!username,
-		retry:0
+		retry: 0,
 	});
-if (isError) {
-	return <NotFoundPage />;
-}
+	if (isError) {
+		return <NotFoundPage />;
+	}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
@@ -47,7 +47,7 @@ if (isError) {
 							{user?.data.user.username ? '@' + user?.data.user.username : <Skeleton />}
 						</h2>
 						<h3 className='lg:text-xl text-lg text-start font-normal '>
-							{user?.data.user.email || <Skeleton  />}
+							{user?.data.user.email || <Skeleton />}
 						</h3>
 					</div>
 

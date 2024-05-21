@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
+import axios from '../axios/axios';
 import { BlogPropsType } from '../types/Blogprops.type';
 import Avatar from '../components/Avatar';
 import { useEffect, useMemo, useState } from 'react';

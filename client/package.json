@@ -19,6 +19,7 @@
     "@whale_in_space/hikari-common": "^1.0.4",
     "axios": "^1.6.8",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "lodash.debounce": "^4.0.8",
     "react-loading-skeleton": "^3.4.0",
     "react-router-dom": "^6.23.1",

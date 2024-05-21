@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 import { Toaster, toast } from 'sonner';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import axios from '../axios/axios';
 import { BlockNoteEditor } from '@blocknote/core';
 import { Category } from '@whale_in_space/hikari-common';
 import CategoryInput from '../components/CategoryInput';
@@ -137,9 +137,9 @@ const EditBlog = () => {
 			debounceSave();
 		}
 	}, [title, content, category, debounceSave, isChange]);
-if (isError) {
-	return <OopsPage />;
-}
+	if (isError) {
+		return <OopsPage />;
+	}
 	return (
 		<div className='flex font-fractul h-screen'>
 			<Toaster />
