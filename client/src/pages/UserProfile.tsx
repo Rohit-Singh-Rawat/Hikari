@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
 import axios from '../axios/axios';
-import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
+import { Link,  useLocation, useParams } from 'react-router-dom';
 
 import Skeleton from 'react-loading-skeleton';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
