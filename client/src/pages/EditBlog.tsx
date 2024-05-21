@@ -37,7 +37,7 @@ const EditBlog = () => {
 			return response.data;
 		},
 		enabled: !!id,
-		staleTime: 300000,
+		staleTime: 0,
 	});
 
 	const mutation = useMutation({
