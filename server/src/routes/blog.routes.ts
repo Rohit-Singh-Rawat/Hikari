@@ -77,7 +77,7 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'user does not exist or failed to make blog',
 			});
 		}
@@ -99,7 +99,7 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'author does not exist  or failed to publish blog',
 			});
 		}
@@ -135,17 +135,40 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'author does not exist  or failed to update blog',
 			});
 		}
 	})
+	.delete('/:id', async (c) => {
+		const userId = c.get('userId');
+
+		const blogId = c.req.param('id');
+		const prisma = new PrismaClient({
+			datasourceUrl: c.env.DATABASE_URL,
+		}).$extends(withAccelerate());
+
+		try {
+			const blog = await prisma.blog.delete({
+				where: { id: blogId, authorId: userId },
+			});
+			return c.json({
+				id: blog.id,
+			});
+		} catch (error) {
+			c.status(400);
+			return c.json({
+				msg: 'only author can delete or failed to delete blog',
+			});
+		}
+	})
+
 	.get('/bulk', async (c) => {
 		const prisma = new PrismaClient({
 			datasourceUrl: c.env.DATABASE_URL,
 		}).$extends(withAccelerate());
 		try {
-		  const blogs = await prisma.blog.findMany({
+			const blogs = await prisma.blog.findMany({
 				where: { published: true },
 				select: {
 					author: {
@@ -170,7 +193,7 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'failed to fetch blogs',
 			});
 		}
@@ -196,7 +219,7 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'failed to fetch blog or blog not exist',
 			});
 		}
@@ -256,7 +279,7 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'failed to fetch blog or blog not exist',
 			});
 		}
@@ -293,7 +316,7 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'failed to fetch blogs',
 			});
 		}
@@ -342,7 +365,7 @@ blog
 			});
 		} catch (error) {
 			c.status(400);
-			c.json({
+			return c.json({
 				msg: 'failed to fetch blog or blog not exist',
 			});
 		}

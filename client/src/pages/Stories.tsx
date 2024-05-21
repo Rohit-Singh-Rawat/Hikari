@@ -11,6 +11,8 @@ import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 import EditIcon from '../components/icons/EditIcon';
 import OopsPage from '../components/ErrorPage';
 import DraftBlogBlock from '../components/DraftBlogBlock';
+import DeleteButton from '../components/DeleteButton';
+import { Toaster } from 'sonner';
 const Stories = () => {
 	const [showDraft, setShowDraft] = useState<boolean>(true);
 
@@ -49,6 +51,7 @@ const Stories = () => {
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
+			<Toaster/>
 			<div className='w-full flex flex-col items-center justify-center '>
 				<div className='min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl border-b-2 flex flex-col  gap-5 lg:gap-10 pt-5 lg:pt-10 '>
 					<h1 className='lg:text-5xl text-3xl text-start font-semibold lg:underline-offset-8 lg:px-10'>
@@ -86,16 +89,19 @@ const Stories = () => {
 								? draft.map((blog: any) => {
 										return (
 											<div className='flex flex-col  w-full items-center flex-grow'>
-												<Link
-													to={`/${blog.id}/edit`}
-													className='w-full pr-6 flex justify-end '
-												>
-													<div className=' flex gap-2 justify-center size-7 items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
-														<EditIcon />
-													</div>
-												</Link>
-												<DraftBlogBlock
+												<div className='flex  min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl justify-end w-full items-center gap-5'>
+													<Link
+														to={`/${blog.id}/edit`}
+														className='w-full flex justify-end '
+													>
+														<div className=' flex gap-2 justify-center size-7 items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
+															<EditIcon />
+														</div>
+													</Link>
+													<DeleteButton blogId={blog.id} />
+												</div>
 
+												<DraftBlogBlock
 													reads={blog.reads}
 													excerpt={blog.excerpt}
 													id={blog.id}
@@ -117,15 +123,19 @@ const Stories = () => {
 							? published.map((blog: any) => {
 									return (
 										<div className='flex flex-col  w-full items-center flex-grow'>
-											<Link
-												to={`/${blog.id}/edit`}
-												className='w-full pr-6 flex justify-end '
-											>
-												<div className=' flex gap-2 justify-center size-7 items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
-													<EditIcon />
-												</div>
-											</Link>
-											<BlogBlock
+											<div className='flex  min-w-[90%] md:min-w-[672px] max-w-[90%] md:max-w-2xl justify-end w-full items-center gap-5'>
+												<Link
+													to={`/${blog.id}/edit`}
+													className='w-full flex justify-end '
+												>
+													<div className=' flex gap-2 justify-center size-7 items-center font-medium rounded-full  hover:bg-gray-300 p-1'>
+														<EditIcon />
+													</div>
+												</Link>
+												<DeleteButton blogId={blog.id} />
+											</div>
+
+											<DraftBlogBlock
 												reads={blog.reads}
 												excerpt={blog.excerpt}
 												id={blog.id}
