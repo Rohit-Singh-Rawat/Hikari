@@ -6,7 +6,6 @@ import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 
 import Skeleton from 'react-loading-skeleton';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
-import OopsPage from '../components/ErrorPage';
 import NotFoundPage from './PageNotFound';
 const UserProfile = () => {
 	const { username } = useParams();
@@ -65,7 +64,7 @@ const UserProfile = () => {
 						{isLoading
 							? Array(8)
 									.fill(0)
-									.map((ske, i) => <BlogCardSkeleton key={i} />)
+									.map((_, i) => <BlogCardSkeleton key={i} />)
 							: user?.data.user.blogs.map((blog: any) => {
 									return (
 										<BlogBlock

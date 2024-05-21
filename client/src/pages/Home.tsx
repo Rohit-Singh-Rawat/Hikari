@@ -38,7 +38,7 @@ const Home = () => {
 					{isLoading
 						? Array(8)
 								.fill(0)
-								.map((a, i) => <BlogCardSkeleton key={i} />)
+								.map((_, i) => <BlogCardSkeleton key={i} />)
 						: blogs?.data?.blogs?.map((blog: any) => {
 								return (
 									<BlogBlock

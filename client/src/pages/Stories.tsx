@@ -6,9 +6,10 @@ import { BlogPropsType } from '../types/Blogprops.type';
 import { useMemo, useState } from 'react';
 import { cn } from '../utils/cn';
 
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
 import EditIcon from '../components/icons/EditIcon';
+import OopsPage from '../components/ErrorPage';
 const Stories = () => {
 	const [showDraft, setShowDraft] = useState<boolean>(true);
 
@@ -41,7 +42,9 @@ const Stories = () => {
 				(story: BlogPropsType & { published: boolean }) => story.published === true
 			);
 	}, [stories]);
-
+	if (isError) {
+		return <OopsPage />;
+	}
 	return (
 		<div className='w-full min-h-screen bg-[#EAEAEA] font-fractul '>
 			<NavBar />
@@ -76,7 +79,7 @@ const Stories = () => {
 						{isLoading
 							? Array(4)
 									.fill(0)
-									.map((ske, i) => <BlogCardSkeleton key={i} />)
+									.map((_, i) => <BlogCardSkeleton key={i} />)
 							: showDraft
 							? draft.length > 0
 								? draft.map((blog: any) => {
@@ -107,7 +110,7 @@ const Stories = () => {
 							: isLoading
 							? Array(4)
 									.fill(0)
-									.map((ske, i) => <BlogCardSkeleton key={i} />)
+									.map((_, i) => <BlogCardSkeleton key={i} />)
 							: published.length > 0
 							? published.map((blog: any) => {
 									return (

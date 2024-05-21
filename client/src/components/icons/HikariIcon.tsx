@@ -296,7 +296,7 @@ const HikariIcon = ({ className }: { className?: string }) => {
 					</g>{' '}
 					<g transform='translate(82,12.335813522338867)'>
 						<g
-							fillRule=''
+							
 							stroke='#000000'
 							className='tp-name iconsvg-namesvg'
 						>

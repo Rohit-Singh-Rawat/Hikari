@@ -47,7 +47,7 @@ const Search = () => {
 						{isLoading ? (
 							Array(4)
 								.fill(0)
-								.map((ske, i) => <BlogCardSkeleton key={i} />)
+								.map((_, i) => <BlogCardSkeleton key={i} />)
 						) : searchedBlogs?.data?.blogs?.length > 0 ? (
 							searchedBlogs?.data?.blogs?.map((blog: any) => {
 								return (
