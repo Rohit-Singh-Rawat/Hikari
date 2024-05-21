@@ -36,7 +36,7 @@ const NewStory = () => {
 			toast.loading('saving to draft...');
 
 			return axios.post(
-				'http://127.0.0.1:8787/api/v1/blog/create',
+				'/blog/create',
 				{
 					title: title,
 					content: content,

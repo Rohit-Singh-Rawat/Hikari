@@ -18,7 +18,7 @@ const Search = () => {
 		queryKey: ['blogs', queryValue],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
-			const response = await axios.get(`http://127.0.0.1:8787/api/v1/blog/search?q=${queryValue}`, {
+			const response = await axios.get(`/blog/search?q=${queryValue}`, {
 				headers: {
 					Authorization: token,
 				},

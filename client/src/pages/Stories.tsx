@@ -21,7 +21,7 @@ const Stories = () => {
 		queryKey: ['stories'],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
-			const response = await axios.get(`http://127.0.0.1:8787/api/v1/blog/stories`, {
+			const response = await axios.get(`/blog/stories`, {
 				headers: {
 					Authorization: token,
 				},

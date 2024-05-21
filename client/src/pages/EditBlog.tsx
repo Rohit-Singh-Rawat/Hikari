@@ -29,7 +29,7 @@ const EditBlog = () => {
 		queryKey: ['editBlog', id],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
-			const response = await axios.get(`http://127.0.0.1:8787/api/v1/blog/${id}/edit`, {
+			const response = await axios.get(`/blog/${id}/edit`, {
 				headers: {
 					Authorization: token,
 				},
@@ -48,7 +48,7 @@ const EditBlog = () => {
 
 			toast.loading(data.blog.published ? 'Updating blog...' : 'Saving to draft...');
 			await axios.put(
-				`http://127.0.0.1:8787/api/v1/blog`,
+				`/blog`,
 				{
 					id: id,
 					title: title,
@@ -82,7 +82,7 @@ const EditBlog = () => {
 			}
 			toast.loading('Publishing...');
 			await axios.post(
-				`http://127.0.0.1:8787/api/v1/blog/publish/${id}`,
+				`/blog/publish/${id}`,
 				{},
 				{
 					headers: {

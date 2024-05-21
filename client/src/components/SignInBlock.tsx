@@ -5,8 +5,9 @@ import LabelledButton from './LabelledButton';
 import { SigninType } from '@whale_in_space/hikari-common';
 import {  toast } from 'sonner';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
+import axios from '../axios/axios';
 const SignInBlock = () => {
 	const [signinInputs, setSigninTnputs] = useState<SigninType>({
 		ValidityState: '',
@@ -22,7 +23,7 @@ const SignInBlock = () => {
 			}
 			toast.loading('Signing In...');
 
-			return axios.post('http://127.0.0.1:8787/api/v1/user/signin', signinInputs);
+			return axios.post('/user/signin', signinInputs);
 		},
 		onSettled: () => {
 			toast.dismiss();

@@ -14,7 +14,7 @@ const Home = () => {
 		queryKey: ['blogs'],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
-			const response = await axios.get('http://127.0.0.1:8787/api/v1/blog/bulk', {
+			const response = await axios.get('/blog/bulk', {
 				headers: {
 					Authorization: token,
 				},

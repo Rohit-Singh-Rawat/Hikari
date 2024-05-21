@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import HikariIcon from './icons/HikariIcon';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { SignupType } from '@whale_in_space/hikari-common';
-
+import axios from '../axios/axios';
 const SignUpBlock = () => {
 	const [signupInputs, setSignupInputs] = useState<SignupType>({
 		username: '',
@@ -15,7 +15,7 @@ const SignUpBlock = () => {
 		password: '',
 	});
 	const navigate = useNavigate();
-	
+
 	const queryClient = useQueryClient();
 	const mutation = useMutation({
 		mutationFn: (event: React.FocusEvent<HTMLFormElement>) => {
@@ -30,13 +30,13 @@ const SignUpBlock = () => {
 
 			toast.loading('Signing Up...');
 
-			return axios.post('http://127.0.0.1:8787/api/v1/user/signup', signupInputs);
+			return axios.post('/user/signup', signupInputs);
 		},
 		onSettled: () => {
 			toast.dismiss();
 		},
-		onError: (error:AxiosError<{error?:String}>) => {
-			toast.error(error.response?.data?.error as String ||error.message|| 'Error');
+		onError: (error: AxiosError<{ error?: String }>) => {
+			toast.error((error.response?.data?.error as String) || error.message || 'Error');
 		},
 		onSuccess: (data) => {
 			localStorage.setItem('token', data.data.jwt);

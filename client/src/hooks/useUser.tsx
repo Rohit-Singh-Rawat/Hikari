@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from '../axios/axios'
+import axios from '../axios/axios';
 import { useNavigate } from 'react-router-dom';
 
 export interface User {
@@ -14,13 +14,17 @@ export default function useUser() {
 	const token = localStorage.getItem('token');
 
 	if (token) {
-		const { data: user, isLoading, isError } = useQuery({
+		const {
+			data: user,
+			isLoading,
+			isError,
+		} = useQuery({
 			queryKey: ['authUser'],
 			queryFn: async () => {
 				try {
 					const response = await axios({
 						method: 'get',
-						url: 'http://127.0.0.1:8787/api/v1/user/me',
+						url: '/user/me',
 						headers: {
 							'Content-Type': 'application/json',
 							Authorization: `Bearer ${token}`,
@@ -42,7 +46,7 @@ export default function useUser() {
 			retry: false,
 		});
 
-		return { user, isLoading, isError	 };
+		return { user, isLoading, isError };
 	} else {
 		return { user: null, isLoading: false };
 	}

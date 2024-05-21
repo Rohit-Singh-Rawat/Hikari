@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import BlogBlock from '../components/BlogBlock';
 import NavBar from '../components/NavBar';
 import axios from '../axios/axios';
-import { Link,  useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import Skeleton from 'react-loading-skeleton';
 import BlogCardSkeleton from '../components/Loading/BlogCardSkeleton';
@@ -19,7 +19,7 @@ const UserProfile = () => {
 		queryKey: ['profile', id],
 		queryFn: async () => {
 			const token = localStorage.getItem('token');
-			const response = await axios.get(`http://127.0.0.1:8787/api/v1/user/profile/${id}`, {
+			const response = await axios.get(`/user/profile/${id}`, {
 				headers: {
 					Authorization: token,
 				},
