@@ -10,17 +10,7 @@ const app = new Hono<{
 		JWT_SECRET: string;
 	};
 }>();
-app.use(
-	'/*',
-	cors({
-		origin: 'https://hikari-zeta.vercel.app',
-		allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
-		allowMethods: ['POST', 'GET', 'OPTIONS'],
-		exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
-		maxAge: 600,
-		credentials: true,
-	})
-);
+app.use('/*', cors());
 
 app.route('/api/v1', router);
 export default app;
